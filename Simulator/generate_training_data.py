@@ -5,6 +5,7 @@ import json
 import time
 import random
 import argparse
+import re # Import regular expressions
 from subprocess import Popen, PIPE
 from nbstreamreader import NonBlockingStreamReader as NBSR
 from Game import Game
@@ -39,9 +40,11 @@ class TakDataGenerator:
             os.system("g++ -O3 -o tak_ai main.cpp")
 
     def create_child_process(self, player_id):
-        """Create a child process running the Tak AI"""
-        process = Popen(["./tak_ai"], stdin=PIPE, stdout=PIPE, bufsize=0)
-        return process, NBSR(process.stdout)
+        """Create a child process running the Tak AI, capturing stdout and stderr."""
+        # Make sure the path to tak_ai is correct if it's not in the current dir
+        process = Popen(["./tak_ai"], stdin=PIPE, stdout=PIPE, stderr=PIPE, bufsize=0)
+        # Return readers for both stdout and stderr
+        return process, NBSR(process.stdout), NBSR(process.stderr)
 
     def structured_encode_move(self, move: str) -> np.ndarray:
         """
@@ -296,24 +299,50 @@ class TakDataGenerator:
             "turn": state["turn"]
         }
     
+    def _read_heuristic_from_stderr(self, stderr_reader, timeout=0.1):
+        """Reads lines from stderr and extracts the last heuristic value found."""
+        last_heuristic = None
+        line = stderr_reader.readline(timeout=timeout)
+        while line:
+            line_str = line.decode('utf-8').strip()
+            # Use regex to find the heuristic value line
+            match = re.search(r"the heuristic value is\s*=\s*([-\d\.]+),([-\d\.]+)", line_str)
+            if match:
+                try:
+                    # Extract the two values
+                    h_val_1 = float(match.group(1))
+                    h_val_2 = float(match.group(2))
+                    last_heuristic = [h_val_1, h_val_2] # Store as a list
+                    # print(f"Debug: Found heuristic: {last_heuristic}") # Optional debug print
+                except ValueError:
+                    print(f"Warning: Could not parse heuristic values from line: {line_str}")
+            # Keep reading lines until timeout
+            line = stderr_reader.readline(timeout=timeout)
+        return last_heuristic
+
     def _run_single_game(self, game_id):
-        """Runs a single game simulation and saves its transformer samples to a unique file."""
+        """Runs a single game simulation and saves its transformer samples and game data."""
         print(f"Starting game {game_id+1}/{self.games}...")
         game = Game(self.board_size, "CUI")
-        p1_process, p1_reader = self.create_child_process(1)
-        p2_process, p2_reader = self.create_child_process(2)
-        
-        local_transformer_samples = [] # Samples specific to this game/thread
-        game_data_filename = f"{self.output_dir}/game_{game_id}.json" # Raw game log filename
-        transformer_data_filename = f"{self.transformer_dir}/transformer_samples_game_{game_id}.json" # Transformer samples filename
-        
+        # Get stderr readers as well
+        p1_process, p1_stdout_reader, p1_stderr_reader = self.create_child_process(1)
+        p2_process, p2_stdout_reader, p2_stderr_reader = self.create_child_process(2)
+
+        local_transformer_samples = []
+        game_data_filename = f"{self.output_dir}/game_{game_id}.json"
+        transformer_data_filename = f"{self.transformer_dir}/transformer_samples_game_{game_id}.json"
+
+        # Variables to store the latest heuristic read *before* the move
+        p1_last_heuristic = None
+        p2_last_heuristic = None
+
         try:
+            # Initialize AI processes
             p1_process.stdin.write(f"1 {self.board_size} {self.time_limit}\n".encode('utf-8'))
             p1_process.stdin.flush()
-            
             p2_process.stdin.write(f"2 {self.board_size} {self.time_limit}\n".encode('utf-8'))
             p2_process.stdin.flush()
-            
+
             game_data = {
                 "game_id": game_id,
                 "board_size": self.board_size,
@@ -322,15 +351,18 @@ class TakDataGenerator:
                 "winner": None,
                 "win_type": None
             }
-            
+
             game_over = False
             move_count = 0
-            
-            # Player 1 makes the first move.
-            p1_move = p1_reader.readline(timeout=self.time_limit).decode('utf-8').strip()
+
+            # --- Player 1's First Move ---
+            # Read potential initial stderr output from P1 (though likely none before first move)
+            p1_last_heuristic = self._read_heuristic_from_stderr(p1_stderr_reader)
+            # Read P1's first move from stdout
+            p1_move = p1_stdout_reader.readline(timeout=self.time_limit).decode('utf-8').strip()
             if not p1_move:
                 print(f"Game {game_id+1}: Player 1 timed out on first move")
-                game_data["winner"] = 1 # Player 2 wins if P1 times out
+                game_data["winner"] = 1 # Player 2 wins
                 game_data["win_type"] = "timeout"
                 raise TimeoutError("Player 1 timed out")
 
@@ -341,119 +373,136 @@ class TakDataGenerator:
                 "player": 1,
                 "move": p1_move,
                 "move_vector": self.structured_encode_move(p1_move).tolist(),
-                "board_state": board_state
+                "board_state": board_state,
+                "ai_heuristic_value": p1_last_heuristic # Store heuristic read *before* this move
             })
+            p1_last_heuristic = None # Reset after storing
             move_count += 1
-            
+
             if result > 1:
                 game_data["winner"] = result - 2
                 game_data["win_type"] = game.winner["type"]
                 game_over = True
-            
+
             if not game_over:
+                # Send P1's move to P2
                 p2_process.stdin.write(f"{p1_move}\n".encode('utf-8'))
                 p2_process.stdin.flush()
-            
+
             last_state = board_state
-            
-            # Main game loop.
+
+            # --- Main Game Loop ---
             while not game_over:
-                p2_move = p2_reader.readline(timeout=self.time_limit).decode('utf-8').strip()
+                # --- Player 2's Turn ---
+                # Read P2's stderr for heuristic *before* reading the move
+                p2_last_heuristic = self._read_heuristic_from_stderr(p2_stderr_reader)
+                # Read P2's move from stdout
+                p2_move = p2_stdout_reader.readline(timeout=self.time_limit).decode('utf-8').strip()
                 if not p2_move:
                     print(f"Game {game_id+1}: Player 2 timed out")
-                    game_data["winner"] = 0 # Player 1 wins if P2 times out
+                    game_data["winner"] = 0 # Player 1 wins
                     game_data["win_type"] = "timeout"
-                    break # Exit loop
-                
-                # Generate sample before executing the move
+                    break
+
+                # Generate sample *before* executing the move
                 local_transformer_samples.append(
                     self.create_transformer_training_sample(last_state, p2_move)
                 )
-                
+
                 result = game.execute_move(p2_move)
                 board_state = self.encode_board(game)
-                last_state = board_state # Update last_state after encoding the new state
+                last_state = board_state
                 game_data["moves"].append({
                     "move_number": move_count,
                     "player": 2,
                     "move": p2_move,
                     "move_vector": self.structured_encode_move(p2_move).tolist(),
-                    "board_state": board_state
+                    "board_state": board_state,
+                    "ai_heuristic_value": p2_last_heuristic # Store heuristic read *before* this move
                 })
+                p2_last_heuristic = None # Reset
                 move_count += 1
-                
+
                 if result > 1:
                     game_data["winner"] = result - 2
                     game_data["win_type"] = game.winner["type"]
-                    break # Exit loop
-                
+                    break
+
+                # Send P2's move to P1
                 p1_process.stdin.write(f"{p2_move}\n".encode('utf-8'))
                 p1_process.stdin.flush()
-                
-                p1_move = p1_reader.readline(timeout=self.time_limit).decode('utf-8').strip()
+
+                # --- Player 1's Turn ---
+                # Read P1's stderr for heuristic *before* reading the move
+                p1_last_heuristic = self._read_heuristic_from_stderr(p1_stderr_reader)
+                # Read P1's move from stdout
+                p1_move = p1_stdout_reader.readline(timeout=self.time_limit).decode('utf-8').strip()
                 if not p1_move:
                     print(f"Game {game_id+1}: Player 1 timed out")
-                    game_data["winner"] = 1 # Player 2 wins if P1 times out
+                    game_data["winner"] = 1 # Player 2 wins
                     game_data["win_type"] = "timeout"
-                    break # Exit loop
-                
-                # Generate sample before executing the move
+                    break
+
+                # Generate sample *before* executing the move
                 local_transformer_samples.append(
                     self.create_transformer_training_sample(last_state, p1_move)
                 )
-                
+
                 result = game.execute_move(p1_move)
                 board_state = self.encode_board(game)
-                last_state = board_state # Update last_state after encoding the new state
+                last_state = board_state
                 game_data["moves"].append({
                     "move_number": move_count,
                     "player": 1,
                     "move": p1_move,
                     "move_vector": self.structured_encode_move(p1_move).tolist(),
-                    "board_state": board_state
+                    "board_state": board_state,
+                    "ai_heuristic_value": p1_last_heuristic # Store heuristic read *before* this move
                 })
+                p1_last_heuristic = None # Reset
                 move_count += 1
-                
+
                 if result > 1:
                     game_data["winner"] = result - 2
                     game_data["win_type"] = game.winner["type"]
-                    break # Exit loop
-                
+                    break
+
+                # Send P1's move to P2
                 p2_process.stdin.write(f"{p1_move}\n".encode('utf-8'))
                 p2_process.stdin.flush()
-            
-            # Save individual game data log
+
+            # --- End of Game ---
+            # Save individual game data log (now includes heuristic values)
             with open(game_data_filename, "w") as f:
                 json.dump(game_data, f, indent=2)
-            
-            # Add winner information to the samples generated *during* this game
+
+            # Add winner information to transformer samples
             if game_data["winner"] is not None:
                 for sample in local_transformer_samples:
-                    # Determine the player whose turn it was when the state `sample['input_tensor']` was recorded
-                    player_making_move = 1 if sample["turn"] == 1 else 0 # Player 2 (index 1) moves if turn is 1, Player 1 (index 0) moves if turn is 0
+                    player_making_move = 1 if sample["turn"] == 1 else 0
                     sample["from_winner"] = (player_making_move == game_data["winner"])
 
-            # Save transformer samples for this game to its own file
-            with open(transformer_data_filename, "w") as f:
-                json.dump(local_transformer_samples, f) # No indentation for potentially large file
+            # Save transformer samples
+            # with open(transformer_data_filename, "w") as f:
+            #     json.dump(local_transformer_samples, f)
 
-            print(f"Game {game_id+1} completed. Winner: Player {game_data['winner']+1 if game_data['winner'] is not None else 'None'} " + 
-                  (f"({game_data['win_type']} win)" if game_data["win_type"] else "") + 
+            print(f"Game {game_id+1} completed. Winner: Player {game_data['winner']+1 if game_data['winner'] is not None else 'None'} " +
+                  (f"({game_data['win_type']} win)" if game_data["win_type"] else "") +
                   f". Saved {len(local_transformer_samples)} samples to {transformer_data_filename}")
-            
+
             return True # Indicate success
 
         except Exception as e:
-            print(f"Error in game {game_id+1}: {str(e)}")
-            # Optionally save partial data or just log the error
-            # If saving partial data, ensure file writing happens here or is handled carefully
+            import traceback
+            print(f"Error in game {game_id+1} ({type(e).__name__}): {str(e)}")
+            # traceback.print_exc() # Uncomment for full stack trace
             return False # Indicate failure
         finally:
-            try:
-                p1_process.kill()
-                p2_process.kill()
-            except:
-                pass # Processes might already be terminated
+            # Ensure processes are killed
+            try: p1_process.kill()
+            except: pass
+            try: p2_process.kill()
+            except: pass
 
     def run_games(self):
         """Run multiple games in parallel using threads, saving each game's samples to a separate file."""

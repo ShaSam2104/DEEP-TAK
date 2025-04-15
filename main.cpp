@@ -1,3 +1,4 @@
+#include <random>
 #include <iostream>
 #include <stack>
 #include <string>
@@ -1101,10 +1102,60 @@ double best_move(state myboard[8][8], double alpha, double beta, int depth, stri
             return child;
     }
     if(depth == 1) {
-        if(minimum)
-            return min_val;
-        else
-            return max_val;
+        vector<pair<double, string> > scored_moves;
+        double sum_exp = 0.0;
+    
+        // First pass to calculate val for all moves and sum of exp(val)
+        for(int i = 0; i < size; i++) {
+            int crushed = 0;
+            perform_move(all_moves[i], move_player, myboard, crushed, 0);
+    
+            if(!minimum)   
+                ans = at_endstate(myboard, false, 0);
+            else 
+                ans = at_endstate(myboard, false, 1);
+    
+            if(ans == 10.0)
+                val = LONG_MAX;
+            else if(ans == -10.0)
+                val = LONG_MIN;
+            else if(ans == 0.0)
+                val = get_heuristic(myboard);
+            else {
+                if(ans == LONG_MAX * 0.0001)
+                    val = 0.0;
+                else
+                    val = ans * LONG_MAX;
+            }
+    
+            scored_moves.emplace_back(val, all_moves[i]);
+            undo_move(all_moves[i], move_player, myboard, crushed);
+        }
+    
+        // Compute softmax probabilities
+        vector<double> probs;
+        double max_val_for_stability = scored_moves[0].first;
+        for (auto &p : scored_moves)
+            max_val_for_stability = max(max_val_for_stability, p.first);
+    
+        for (auto &p : scored_moves) {
+            double exp_val = exp((p.first - max_val_for_stability) / 1000.0); // scale to avoid large exponents
+            probs.push_back(exp_val);
+            sum_exp += exp_val;
+        }
+    
+        // Normalize
+        for (auto &p : probs)
+            p /= sum_exp;
+    
+        // Sample a move using normalized probabilities
+        std::discrete_distribution<int> dist(probs.begin(), probs.end());
+        std::random_device rd;
+        std::mt19937 gen(rd());
+        int chosen_idx = dist(gen);
+    
+        best_move_chosen = scored_moves[chosen_idx].second;
+        return scored_moves[chosen_idx].first;
     }
     // If depth > 1, then perform alpha-beta search in the sorted priority queues
     if(minimum) {

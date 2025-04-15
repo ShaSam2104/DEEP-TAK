@@ -14,6 +14,7 @@
 #include <time.h>
 #include <queue>
 #include <fstream>
+#include <unistd.h>
 
 using namespace std;
 
@@ -1242,7 +1243,7 @@ void print_board(state Board[8][8]) {
 
 int main(int argc, char** argv) {
     // Start random seed for random functions
-    srand(time(NULL));
+    srand(time(NULL)^getpid());
     
     int n, time_limit;
     // Get input from server about game specifications

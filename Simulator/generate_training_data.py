@@ -8,13 +8,16 @@ import argparse
 from subprocess import Popen, PIPE
 from nbstreamreader import NonBlockingStreamReader as NBSR
 from Game import Game
+import threading # Added for multithreading
+from concurrent.futures import ThreadPoolExecutor, as_completed # Added for managing threads
 
 class TakDataGenerator:
-    def __init__(self, board_size=5, time_limit=600, games=100, output_dir="training_data"):
+    def __init__(self, board_size=5, time_limit=600, games=100, output_dir="training_data", num_workers=4): # Added num_workers
         self.board_size = board_size
         self.time_limit = time_limit
         self.games = games
         self.output_dir = output_dir
+        self.num_workers = num_workers # Store number of worker threads
         self.compile_cpp()
         
         # Create output directory if it doesn't exist
@@ -25,6 +28,9 @@ class TakDataGenerator:
         self.transformer_dir = f"{output_dir}/transformer_format"
         if not os.path.exists(self.transformer_dir):
             os.makedirs(self.transformer_dir)
+        
+        # Lock for thread-safe operations if needed (e.g., shared counters, though not strictly needed for appending to separate lists)
+        # self.lock = threading.Lock() 
 
     def compile_cpp(self):
         """Compile the C++ Tak AI if not already present"""
@@ -290,16 +296,18 @@ class TakDataGenerator:
             "turn": state["turn"]
         }
     
-    def run_games(self):
-        """Run multiple games and collect transformer training samples."""
-        transformer_samples = []
+    def _run_single_game(self, game_id):
+        """Runs a single game simulation and saves its transformer samples to a unique file."""
+        print(f"Starting game {game_id+1}/{self.games}...")
+        game = Game(self.board_size, "CUI")
+        p1_process, p1_reader = self.create_child_process(1)
+        p2_process, p2_reader = self.create_child_process(2)
         
-        for game_id in range(self.games):
-            print(f"Starting game {game_id+1}/{self.games}...")
-            game = Game(self.board_size, "CUI")
-            p1_process, p1_reader = self.create_child_process(1)
-            p2_process, p2_reader = self.create_child_process(2)
-            
+        local_transformer_samples = [] # Samples specific to this game/thread
+        game_data_filename = f"{self.output_dir}/game_{game_id}.json" # Raw game log filename
+        transformer_data_filename = f"{self.transformer_dir}/transformer_samples_game_{game_id}.json" # Transformer samples filename
+        
+        try:
             p1_process.stdin.write(f"1 {self.board_size} {self.time_limit}\n".encode('utf-8'))
             p1_process.stdin.flush()
             
@@ -318,15 +326,85 @@ class TakDataGenerator:
             game_over = False
             move_count = 0
             
-            try:
-                # Player 1 makes the first move.
+            # Player 1 makes the first move.
+            p1_move = p1_reader.readline(timeout=self.time_limit).decode('utf-8').strip()
+            if not p1_move:
+                print(f"Game {game_id+1}: Player 1 timed out on first move")
+                game_data["winner"] = 1 # Player 2 wins if P1 times out
+                game_data["win_type"] = "timeout"
+                raise TimeoutError("Player 1 timed out")
+
+            result = game.execute_move(p1_move)
+            board_state = self.encode_board(game)
+            game_data["moves"].append({
+                "move_number": move_count,
+                "player": 1,
+                "move": p1_move,
+                "move_vector": self.structured_encode_move(p1_move).tolist(),
+                "board_state": board_state
+            })
+            move_count += 1
+            
+            if result > 1:
+                game_data["winner"] = result - 2
+                game_data["win_type"] = game.winner["type"]
+                game_over = True
+            
+            if not game_over:
+                p2_process.stdin.write(f"{p1_move}\n".encode('utf-8'))
+                p2_process.stdin.flush()
+            
+            last_state = board_state
+            
+            # Main game loop.
+            while not game_over:
+                p2_move = p2_reader.readline(timeout=self.time_limit).decode('utf-8').strip()
+                if not p2_move:
+                    print(f"Game {game_id+1}: Player 2 timed out")
+                    game_data["winner"] = 0 # Player 1 wins if P2 times out
+                    game_data["win_type"] = "timeout"
+                    break # Exit loop
+                
+                # Generate sample before executing the move
+                local_transformer_samples.append(
+                    self.create_transformer_training_sample(last_state, p2_move)
+                )
+                
+                result = game.execute_move(p2_move)
+                board_state = self.encode_board(game)
+                last_state = board_state # Update last_state after encoding the new state
+                game_data["moves"].append({
+                    "move_number": move_count,
+                    "player": 2,
+                    "move": p2_move,
+                    "move_vector": self.structured_encode_move(p2_move).tolist(),
+                    "board_state": board_state
+                })
+                move_count += 1
+                
+                if result > 1:
+                    game_data["winner"] = result - 2
+                    game_data["win_type"] = game.winner["type"]
+                    break # Exit loop
+                
+                p1_process.stdin.write(f"{p2_move}\n".encode('utf-8'))
+                p1_process.stdin.flush()
+                
                 p1_move = p1_reader.readline(timeout=self.time_limit).decode('utf-8').strip()
                 if not p1_move:
-                    print("Player 1 timed out on first move")
-                    break
+                    print(f"Game {game_id+1}: Player 1 timed out")
+                    game_data["winner"] = 1 # Player 2 wins if P1 times out
+                    game_data["win_type"] = "timeout"
+                    break # Exit loop
+                
+                # Generate sample before executing the move
+                local_transformer_samples.append(
+                    self.create_transformer_training_sample(last_state, p1_move)
+                )
                 
                 result = game.execute_move(p1_move)
                 board_state = self.encode_board(game)
+                last_state = board_state # Update last_state after encoding the new state
                 game_data["moves"].append({
                     "move_number": move_count,
                     "player": 1,
@@ -339,116 +417,100 @@ class TakDataGenerator:
                 if result > 1:
                     game_data["winner"] = result - 2
                     game_data["win_type"] = game.winner["type"]
-                    game_over = True
+                    break # Exit loop
                 
-                if not game_over:
-                    p2_process.stdin.write(f"{p1_move}\n".encode('utf-8'))
-                    p2_process.stdin.flush()
-                
-                last_state = board_state
-                
-                # Main game loop.
-                while not game_over:
-                    p2_move = p2_reader.readline(timeout=self.time_limit).decode('utf-8').strip()
-                    if not p2_move:
-                        print("Player 2 timed out")
-                        game_data["winner"] = 0
-                        break
-                    
-                    transformer_samples.append(
-                        self.create_transformer_training_sample(last_state, p2_move)
-                    )
-                    
-                    result = game.execute_move(p2_move)
-                    board_state = self.encode_board(game)
-                    last_state = board_state
-                    game_data["moves"].append({
-                        "move_number": move_count,
-                        "player": 2,
-                        "move": p2_move,
-                        "move_vector": self.structured_encode_move(p2_move).tolist(),
-                        "board_state": board_state
-                    })
-                    move_count += 1
-                    
-                    if result > 1:
-                        game_data["winner"] = result - 2
-                        game_data["win_type"] = game.winner["type"]
-                        break
-                    
-                    p1_process.stdin.write(f"{p2_move}\n".encode('utf-8'))
-                    p1_process.stdin.flush()
-                    
-                    p1_move = p1_reader.readline(timeout=self.time_limit).decode('utf-8').strip()
-                    if not p1_move:
-                        print("Player 1 timed out")
-                        game_data["winner"] = 1
-                        break
-                    
-                    transformer_samples.append(
-                        self.create_transformer_training_sample(last_state, p1_move)
-                    )
-                    
-                    result = game.execute_move(p1_move)
-                    board_state = self.encode_board(game)
-                    last_state = board_state
-                    game_data["moves"].append({
-                        "move_number": move_count,
-                        "player": 1,
-                        "move": p1_move,
-                        "move_vector": self.structured_encode_move(p1_move).tolist(),
-                        "board_state": board_state
-                    })
-                    move_count += 1
-                    
-                    if result > 1:
-                        game_data["winner"] = result - 2
-                        game_data["win_type"] = game.winner["type"]
-                        break
-                    
-                    p2_process.stdin.write(f"{p1_move}\n".encode('utf-8'))
-                    p2_process.stdin.flush()
-                
-                with open(f"{self.output_dir}/game_{game_id}.json", "w") as f:
-                    json.dump(game_data, f, indent=2)
-                
-                if game_data["winner"] is not None:
-                    for sample in transformer_samples[-move_count:]:
-                        player = 0 if sample["turn"] == 0 else 1
-                        sample["from_winner"] = (player == game_data["winner"])
-                
-                print(f"Game {game_id+1} completed. Winner: Player {game_data['winner']+1 if game_data['winner'] is not None else 'None'} " + 
-                      (f"({game_data['win_type']} win)" if game_data["win_type"] else ""))
-                
-            except Exception as e:
-                print(f"Error in game {game_id}: {str(e)}")
-            finally:
+                p2_process.stdin.write(f"{p1_move}\n".encode('utf-8'))
+                p2_process.stdin.flush()
+            
+            # Save individual game data log
+            with open(game_data_filename, "w") as f:
+                json.dump(game_data, f, indent=2)
+            
+            # Add winner information to the samples generated *during* this game
+            if game_data["winner"] is not None:
+                for sample in local_transformer_samples:
+                    # Determine the player whose turn it was when the state `sample['input_tensor']` was recorded
+                    player_making_move = 1 if sample["turn"] == 1 else 0 # Player 2 (index 1) moves if turn is 1, Player 1 (index 0) moves if turn is 0
+                    sample["from_winner"] = (player_making_move == game_data["winner"])
+
+            # Save transformer samples for this game to its own file
+            with open(transformer_data_filename, "w") as f:
+                json.dump(local_transformer_samples, f) # No indentation for potentially large file
+
+            print(f"Game {game_id+1} completed. Winner: Player {game_data['winner']+1 if game_data['winner'] is not None else 'None'} " + 
+                  (f"({game_data['win_type']} win)" if game_data["win_type"] else "") + 
+                  f". Saved {len(local_transformer_samples)} samples to {transformer_data_filename}")
+            
+            return True # Indicate success
+
+        except Exception as e:
+            print(f"Error in game {game_id+1}: {str(e)}")
+            # Optionally save partial data or just log the error
+            # If saving partial data, ensure file writing happens here or is handled carefully
+            return False # Indicate failure
+        finally:
+            try:
+                p1_process.kill()
+                p2_process.kill()
+            except:
+                pass # Processes might already be terminated
+
+    def run_games(self):
+        """Run multiple games in parallel using threads, saving each game's samples to a separate file."""
+        games_completed = 0
+        games_failed = 0
+        
+        # Use ThreadPoolExecutor for easier management
+        with ThreadPoolExecutor(max_workers=self.num_workers) as executor:
+            # Submit all game tasks to the executor
+            futures = {executor.submit(self._run_single_game, game_id): game_id for game_id in range(self.games)}
+            
+            # Process results as they complete (mainly for tracking and error handling)
+            for future in as_completed(futures):
+                game_id = futures[future]
                 try:
-                    p1_process.kill()
-                    p2_process.kill()
-                except:
-                    pass
-                time.sleep(1)
-        
-        with open(f"{self.transformer_dir}/transformer_data.json", "w") as f:
-            json.dump(transformer_samples, f)
-        
-        print(f"Saved {len(transformer_samples)} training samples in transformer format")
+                    success = future.result() # Check if the game completed successfully
+                    if success:
+                        games_completed += 1
+                    else:
+                        games_failed += 1
+                except Exception as exc:
+                    print(f'Game {game_id+1} generated an exception during execution: {exc}')
+                    games_failed += 1
+
+        # Final summary message
+        print(f"\nFinished running {self.games} games.")
+        print(f"  {games_completed} games completed successfully and saved their data.")
+        print(f"  {games_failed} games failed or encountered errors.")
+        print(f"Transformer samples saved to individual files in: {self.transformer_dir}")
+
 
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser(description="Generate Tak training data")
+    parser = argparse.ArgumentParser(description="Generate Tak training data using parallel game simulations")
     parser.add_argument("--board_size", type=int, default=5, help="Board size (5-7)")
     parser.add_argument("--time_limit", type=int, default=300, help="Time limit per player in seconds")
     parser.add_argument("--games", type=int, default=100, help="Number of games to play")
     parser.add_argument("--output_dir", type=str, default="tak_training_data", help="Output directory for training data")
+    parser.add_argument("--num_workers", type=int, default=4, help="Number of parallel game simulations (threads)") # Added argument
     
     args = parser.parse_args()
     
+    # Validate num_workers
+    if args.num_workers < 1:
+        print("Number of workers must be at least 1.")
+        sys.exit(1)
+        
+    print(f"Starting data generation with {args.num_workers} worker threads...")
+
     generator = TakDataGenerator(
         board_size=args.board_size,
         time_limit=args.time_limit,
         games=args.games,
-        output_dir=args.output_dir
+        output_dir=args.output_dir,
+        num_workers=args.num_workers # Pass num_workers
     )
     
+    start_time = time.time()
     generator.run_games()
+    end_time = time.time()
+    print(f"Total data generation time: {end_time - start_time:.2f} seconds")

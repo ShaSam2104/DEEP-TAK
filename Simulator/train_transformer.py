@@ -115,14 +115,35 @@ class PositionalEncoding(nn.Module):
         x = x + self.pe[:x.size(0), :]
         return self.dropout(x)
 
-# --- Board Encoding Helper (Reimplemented from generate_training_data.py logic) ---
-def board_state_to_tensor(board_state_dict, board_size):
-    """Converts the board_state dictionary from game_*.json into the 14-channel tensor."""
+# --- Board Encoding Helper (Modified to use ai_heuristic_value) ---
+def board_state_to_tensor(board_state_dict, board_size, ai_heuristic_value):
+    """
+    Converts the board_state dictionary from game_*.json into the 14-channel tensor,
+    using the provided ai_heuristic_value for the last two channels.
+    """
+    # Handle potential None or invalid ai_heuristic_value
+    if not isinstance(ai_heuristic_value, (list, tuple)) or len(ai_heuristic_value) != 2:
+        # print(f"Warning: Invalid ai_heuristic_value received: {ai_heuristic_value}. Using [0.0, 0.0].")
+        ai_heuristic_value = [0.0, 0.0]
+    try:
+        # Basic normalization/scaling - adjust the divisor as needed based on typical value ranges
+        heur_val_1 = float(ai_heuristic_value[0]) / 100.0
+        heur_val_2 = float(ai_heuristic_value[1]) / 100.0
+    except (ValueError, TypeError):
+        # print(f"Warning: Could not convert ai_heuristic_value {ai_heuristic_value} to float. Using [0.0, 0.0].")
+        heur_val_1 = 0.0
+        heur_val_2 = 0.0
+
+
     if not board_state_dict or 'board' not in board_state_dict or len(board_state_dict['board']) != board_size * board_size:
-        # Handle cases where board state might be missing or malformed (e.g., end of game)
-        # Return a zero tensor or handle appropriately
-        print("Warning: Invalid or missing board state dict, returning zero tensor.")
-        return torch.zeros((14, board_size, board_size), dtype=torch.float32)
+        # print("Warning: Invalid or missing board state dict, returning zero tensor.")
+        # Still include heuristic values even if board state is bad? Or return all zeros?
+        # Let's return mostly zeros but keep the heuristic channels
+        tensor_data = np.zeros((14, board_size, board_size), dtype=np.float32)
+        tensor_data[12, :, :] = heur_val_1
+        tensor_data[13, :, :] = heur_val_2
+        return torch.from_numpy(tensor_data)
+
 
     # Initialize channels
     player1_flat = np.zeros((board_size, board_size), dtype=np.float32)
@@ -133,41 +154,31 @@ def board_state_to_tensor(board_state_dict, board_size):
     player2_cap = np.zeros((board_size, board_size), dtype=np.float32)
     stack_height = np.zeros((board_size, board_size), dtype=np.float32) # Normalized 0-1
 
-    # Assuming board_state_dict['board'] is a flat list of square dictionaries
+    # --- Board Piece Encoding ---
+    # This placeholder logic MUST be verified/corrected against generate_training_data.py
     for idx, square_dict in enumerate(board_state_dict['board']):
         r, c = divmod(idx, board_size)
-        color_enc = square_dict.get("color_encoding", "000000") # Default if missing
-        type_enc = square_dict.get("type_encoding", "00")     # Default if missing
-        height = square_dict.get("stack_height", 0.0)         # Default if missing
+        color_enc = square_dict.get("color_encoding", "000000")
+        type_enc = square_dict.get("type_encoding", "00")
+        height = square_dict.get("stack_height", 0.0)
 
-        stack_height[r, c] = height # Already normalized in generator
+        stack_height[r, c] = height
 
-        # Determine top piece based on encodings (assuming generator's logic)
-        # This part needs to precisely match how generate_training_data.py created these encodings
-        # Example interpretation (verify this matches your generator's encode_board):
-        top_piece_color = -1 # 0 for player 1, 1 for player 2
-        top_piece_type = -1  # 0 for flat, 1 for wall, 2 for capstone
+        top_piece_color = -1
+        top_piece_type = -1
 
         if height > 0:
-             # Simplistic: Assume last '1' in color_encoding determines owner if mixed stack? Needs verification.
-             if '1' in color_enc:
-                 last_one_idx = color_enc.rfind('1')
-                 # Assuming player 1 is '0' and player 2 is '1' in the Game class logic
-                 # And that color_encoding reflects this directly (needs verification)
-                 # Let's assume the encoding directly maps: '...1' at end means player 2 owns top?
-                 # This is highly dependent on the exact implementation of encode_board
-                 # A safer way might be to look at the Game object state if possible,
-                 # but here we only have the dictionary.
-                 # *** Placeholder logic - MUST BE VERIFIED/CORRECTED ***
-                 if last_one_idx == 5: # Hypothetical: last bit for player 2?
-                      top_piece_color = 1
-                 else: # Otherwise assume player 1?
-                      top_piece_color = 0
+             # *** Placeholder logic - MUST BE VERIFIED/CORRECTED ***
+             # Example: Check the last bit of color_encoding for player 2?
+             if color_enc.endswith('1'):
+                 top_piece_color = 1 # Assume Player 2
+             elif '1' in color_enc: # If not ending in 1, but has a 1, assume Player 1?
+                 top_piece_color = 0 # Assume Player 1
+             # If only '0's, it's an empty square effectively, color/type remain -1
 
-                 if type_enc == "00": top_piece_type = 0 # Flat
-                 elif type_enc == "01": top_piece_type = 1 # Wall
-                 elif type_enc == "10": top_piece_type = 2 # Capstone
-
+             if type_enc == "00": top_piece_type = 0 # Flat
+             elif type_enc == "01": top_piece_type = 1 # Wall
+             elif type_enc == "10": top_piece_type = 2 # Capstone
 
         # Fill channels based on top piece
         if top_piece_color == 0: # Player 1
@@ -178,15 +189,15 @@ def board_state_to_tensor(board_state_dict, board_size):
             if top_piece_type == 0: player2_flat[r, c] = 1.0
             elif top_piece_type == 1: player2_wall[r, c] = 1.0
             elif top_piece_type == 2: player2_cap[r, c] = 1.0
+    # --- End Board Piece Encoding ---
 
-    # Player info channels (assuming these keys exist in board_state_dict)
-    # Normalize counts (e.g., by total possible pieces)
-    total_pieces = (board_size * board_size) // 2 + 1 # Approx total flats + 1 cap
+    # Player info channels
+    total_pieces = (board_size * board_size) // 2 + 1
     p1_flats_norm = board_state_dict.get('player1_flats', 0) / total_pieces
-    p1_caps_norm = board_state_dict.get('player1_capstones', 0) # Max 1
+    p1_caps_norm = board_state_dict.get('player1_capstones', 0)
     p2_flats_norm = board_state_dict.get('player2_flats', 0) / total_pieces
-    p2_caps_norm = board_state_dict.get('player2_capstones', 0) # Max 1
-    turn = board_state_dict.get('turn', 0) # 0 or 1
+    p2_caps_norm = board_state_dict.get('player2_capstones', 0)
+    turn = board_state_dict.get('turn', 0)
 
     player1_flats_channel = np.full((board_size, board_size), p1_flats_norm, dtype=np.float32)
     player1_caps_channel = np.full((board_size, board_size), p1_caps_norm, dtype=np.float32)
@@ -194,33 +205,32 @@ def board_state_to_tensor(board_state_dict, board_size):
     player2_caps_channel = np.full((board_size, board_size), p2_caps_norm, dtype=np.float32)
     turn_channel = np.full((board_size, board_size), turn, dtype=np.float32)
 
-    # Heuristic channels (optional, could be useful) - assuming 'heuristics' dict exists
-    heuristics = board_state_dict.get('heuristics', {})
-    flat_diff_channel = np.full((board_size, board_size), heuristics.get('flat_diff', 0), dtype=np.float32) # Normalize?
-    # Add other heuristic channels similarly if desired
+    # AI Heuristic channels (using the passed-in values)
+    ai_heur_1_channel = np.full((board_size, board_size), heur_val_1, dtype=np.float32)
+    ai_heur_2_channel = np.full((board_size, board_size), heur_val_2, dtype=np.float32)
 
-    # Stack channels - Order must be consistent!
-    tensor = torch.from_numpy(np.stack([
-        player1_flat, player1_wall, player1_cap,
-        player2_flat, player2_wall, player2_cap,
-        stack_height,
-        player1_flats_channel, player1_caps_channel,
-        player2_flats_channel, player2_caps_channel,
-        turn_channel,
-        flat_diff_channel, # Example heuristic channel
-        np.zeros((board_size, board_size), dtype=np.float32) # Placeholder for 14th channel if needed
-        # Add more channels up to 14 if using other heuristics
-    ], axis=0))
+
+    # Stack channels - Order must be consistent! (Now 14 channels)
+    tensor_data = np.stack([
+        player1_flat, player1_wall, player1_cap,           # 0, 1, 2
+        player2_flat, player2_wall, player2_cap,           # 3, 4, 5
+        stack_height,                                      # 6
+        player1_flats_channel, player1_caps_channel,       # 7, 8
+        player2_flats_channel, player2_caps_channel,       # 9, 10
+        turn_channel,                                      # 11
+        ai_heur_1_channel, ai_heur_2_channel               # 12, 13
+    ], axis=0)
+
+    tensor = torch.from_numpy(tensor_data)
 
     # Ensure correct shape (14, H, W)
     if tensor.shape[0] != 14:
-         # Pad or truncate if necessary, or raise error
          raise ValueError(f"Generated tensor has {tensor.shape[0]} channels, expected 14.")
 
     return tensor
 
 
-# --- Tak Dataset (Modified for specific file range) ---
+# --- Tak Dataset (Modified to handle ai_heuristic_value) ---
 class TakDataset(Dataset):
     def __init__(self, data_dir, board_size, max_game_id=68): # Added max_game_id
         # Load specific range of game_*.json files
@@ -238,7 +248,8 @@ class TakDataset(Dataset):
         if not self.data_files:
              raise ValueError(f"No game files found in the range 0-{max_game_id} in {data_dir}")
 
-        self.samples = [] # Store (input_state_dict, target_move_vector) tuples
+        # Store (input_state_dict, ai_heuristic_before_move, target_move_vector) tuples
+        self.samples = []
         self.board_size = board_size
         print(f"Found {len(self.data_files)} game files to process.")
 
@@ -251,11 +262,11 @@ class TakDataset(Dataset):
             "player2_flats": (board_size*board_size)//2 + 1,
             "player2_capstones": 1,
             "turn": 0, # Player 1 starts
-            "heuristics": {} # Empty heuristics initially
+            "heuristics": {} # This 'heuristics' key is no longer used for tensor input
         }
+        # Initial heuristic value before the first move (defaults to [0, 0])
+        initial_ai_heuristic = [0.0, 0.0]
 
-        # --- The rest of the __init__ method remains the same ---
-        # It will now iterate through the self.data_files list which only contains game_0 to game_68
         for file_path in self.data_files:
             try:
                 with open(file_path, 'r') as f:
@@ -265,17 +276,31 @@ class TakDataset(Dataset):
                         print(f"Warning: Skipping file {file_path} due to missing/invalid 'moves' list.")
                         continue
                     last_state_dict = initial_board_state
+                    last_ai_heuristic = initial_ai_heuristic # Heuristic corresponding to last_state_dict
+
                     for move_data in game_data['moves']:
-                         if 'board_state' in move_data and 'move_vector' in move_data:
-                              current_target_vector = move_data['move_vector']
-                              if isinstance(current_target_vector, (list, tuple)) and len(current_target_vector) == 9:
-                                   self.samples.append((last_state_dict, current_target_vector))
-                                   last_state_dict = move_data['board_state']
-                              else:
-                                   print(f"Warning: Invalid move_vector found in {file_path}, move {move_data.get('move_number', '?')}")
-                         else:
-                              print(f"Warning: Missing board_state or move_vector in {file_path}, move {move_data.get('move_number', '?')}")
-                              break
+                        if 'board_state' in move_data and 'move_vector' in move_data:
+                            current_target_vector = move_data['move_vector']
+                            # Get the AI heuristic calculated *before* this move was made
+                            current_ai_heuristic = move_data.get('ai_heuristic_value', [0.0, 0.0])
+                            if current_ai_heuristic is None: # Handle explicit null
+                                current_ai_heuristic = [0.0, 0.0]
+
+                            # Ensure target vector is valid
+                            if isinstance(current_target_vector, (list, tuple)) and len(current_target_vector) == 9:
+                                # Add the pair:
+                                # (state *before* this move, heuristic *before* this move, move_vector *of* this move)
+                                self.samples.append((last_state_dict, last_ai_heuristic, current_target_vector))
+
+                                # Update state and heuristic for the next iteration
+                                last_state_dict = move_data['board_state']
+                                last_ai_heuristic = current_ai_heuristic
+                            else:
+                                print(f"Warning: Invalid move_vector found in {file_path}, move {move_data.get('move_number', '?')}")
+                        else:
+                             print(f"Warning: Missing board_state or move_vector in {file_path}, move {move_data.get('move_number', '?')}")
+                             break # Stop processing this game if data is inconsistent
+
             except json.JSONDecodeError:
                 print(f"Warning: Skipping corrupted JSON file: {file_path}")
             except Exception as e:
@@ -290,18 +315,14 @@ class TakDataset(Dataset):
         return len(self.samples)
 
     def __getitem__(self, idx):
-        state_dict, target_move_vector = self.samples[idx]
+        # Unpack state, heuristic, and target
+        state_dict, ai_heuristic, target_move_vector = self.samples[idx]
 
-        # Convert state dict to tensor
-        # It's crucial that board_state_to_tensor correctly interprets the state_dict
-        input_tensor = board_state_to_tensor(state_dict, self.board_size)
+        # Convert state dict and heuristic to tensor
+        input_tensor = board_state_to_tensor(state_dict, self.board_size, ai_heuristic)
 
         # Target move vector
         encoded_move = torch.tensor(target_move_vector, dtype=torch.long)
-
-        # --- Optional: Re-validate target dimensions ---
-        # (Validation code from previous version can be added here if desired)
-        # ...
 
         return input_tensor, encoded_move
 

@@ -1,0 +1,6633 @@
+{
+  "game_id": 44,
+  "board_size": 5,
+  "time_limit": 300,
+  "moves": [
+    {
+      "move_number": 0,
+      "player": 1,
+      "move": "Fc1",
+      "move_vector": [
+        0,
+        0,
+        2,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "board_state": {
+        "board": [
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000001",
+            "type_encoding": "00",
+            "stack_height": 0.2
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          }
+        ],
+        "board_size": 5,
+        "player1_flats": 21,
+        "player1_capstones": 1,
+        "player2_flats": 20,
+        "player2_capstones": 1,
+        "turn": 1,
+        "heuristics": {
+          "flat_diff": -1,
+          "center_control": 0,
+          "stack_control": -1,
+          "road_potential": 0,
+          "capstone_value": 0
+        }
+      },
+      "ai_heuristic_value": null
+    },
+    {
+      "move_number": 1,
+      "player": 2,
+      "move": "Fa1",
+      "move_vector": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "board_state": {
+        "board": [
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.2
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000001",
+            "type_encoding": "00",
+            "stack_height": 0.2
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          }
+        ],
+        "board_size": 5,
+        "player1_flats": 20,
+        "player1_capstones": 1,
+        "player2_flats": 20,
+        "player2_capstones": 1,
+        "turn": 0,
+        "heuristics": {
+          "flat_diff": 0,
+          "center_control": 0,
+          "stack_control": 0,
+          "road_potential": 0,
+          "capstone_value": 0
+        }
+      },
+      "ai_heuristic_value": null
+    },
+    {
+      "move_number": 2,
+      "player": 1,
+      "move": "Fa3",
+      "move_vector": [
+        0,
+        0,
+        0,
+        2,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "board_state": {
+        "board": [
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.2
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000001",
+            "type_encoding": "00",
+            "stack_height": 0.2
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.2
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          }
+        ],
+        "board_size": 5,
+        "player1_flats": 19,
+        "player1_capstones": 1,
+        "player2_flats": 20,
+        "player2_capstones": 1,
+        "turn": 1,
+        "heuristics": {
+          "flat_diff": 1,
+          "center_control": 0,
+          "stack_control": 1,
+          "road_potential": 0,
+          "capstone_value": 0
+        }
+      },
+      "ai_heuristic_value": null
+    },
+    {
+      "move_number": 3,
+      "player": 2,
+      "move": "Fc2",
+      "move_vector": [
+        0,
+        0,
+        2,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "board_state": {
+        "board": [
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.2
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000001",
+            "type_encoding": "00",
+            "stack_height": 0.2
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000001",
+            "type_encoding": "00",
+            "stack_height": 0.2
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.2
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          }
+        ],
+        "board_size": 5,
+        "player1_flats": 19,
+        "player1_capstones": 1,
+        "player2_flats": 19,
+        "player2_capstones": 1,
+        "turn": 0,
+        "heuristics": {
+          "flat_diff": 0,
+          "center_control": 0,
+          "stack_control": 0,
+          "road_potential": -1,
+          "capstone_value": 0
+        }
+      },
+      "ai_heuristic_value": null
+    },
+    {
+      "move_number": 4,
+      "player": 1,
+      "move": "Fa4",
+      "move_vector": [
+        0,
+        0,
+        0,
+        3,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "board_state": {
+        "board": [
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.2
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000001",
+            "type_encoding": "00",
+            "stack_height": 0.2
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000001",
+            "type_encoding": "00",
+            "stack_height": 0.2
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.2
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.2
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          }
+        ],
+        "board_size": 5,
+        "player1_flats": 18,
+        "player1_capstones": 1,
+        "player2_flats": 19,
+        "player2_capstones": 1,
+        "turn": 1,
+        "heuristics": {
+          "flat_diff": 1,
+          "center_control": 0,
+          "stack_control": 1,
+          "road_potential": 0,
+          "capstone_value": 0
+        }
+      },
+      "ai_heuristic_value": [
+        -21.8462,
+        -23.2
+      ]
+    },
+    {
+      "move_number": 5,
+      "player": 2,
+      "move": "Fc3",
+      "move_vector": [
+        0,
+        0,
+        2,
+        2,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "board_state": {
+        "board": [
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.2
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000001",
+            "type_encoding": "00",
+            "stack_height": 0.2
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000001",
+            "type_encoding": "00",
+            "stack_height": 0.2
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.2
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000001",
+            "type_encoding": "00",
+            "stack_height": 0.2
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.2
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          }
+        ],
+        "board_size": 5,
+        "player1_flats": 18,
+        "player1_capstones": 1,
+        "player2_flats": 18,
+        "player2_capstones": 1,
+        "turn": 0,
+        "heuristics": {
+          "flat_diff": 0,
+          "center_control": -1,
+          "stack_control": 0,
+          "road_potential": -1,
+          "capstone_value": 0
+        }
+      },
+      "ai_heuristic_value": [
+        13.2272,
+        2.40378
+      ]
+    },
+    {
+      "move_number": 6,
+      "player": 1,
+      "move": "Fa2",
+      "move_vector": [
+        0,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "board_state": {
+        "board": [
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.2
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000001",
+            "type_encoding": "00",
+            "stack_height": 0.2
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.2
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000001",
+            "type_encoding": "00",
+            "stack_height": 0.2
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.2
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000001",
+            "type_encoding": "00",
+            "stack_height": 0.2
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.2
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          }
+        ],
+        "board_size": 5,
+        "player1_flats": 17,
+        "player1_capstones": 1,
+        "player2_flats": 18,
+        "player2_capstones": 1,
+        "turn": 1,
+        "heuristics": {
+          "flat_diff": 1,
+          "center_control": -1,
+          "stack_control": 1,
+          "road_potential": 1,
+          "capstone_value": 0
+        }
+      },
+      "ai_heuristic_value": [
+        -18.7728,
+        -17.9653
+      ]
+    },
+    {
+      "move_number": 7,
+      "player": 2,
+      "move": "Fa5",
+      "move_vector": [
+        0,
+        0,
+        0,
+        4,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "board_state": {
+        "board": [
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.2
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000001",
+            "type_encoding": "00",
+            "stack_height": 0.2
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.2
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000001",
+            "type_encoding": "00",
+            "stack_height": 0.2
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.2
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000001",
+            "type_encoding": "00",
+            "stack_height": 0.2
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.2
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000001",
+            "type_encoding": "00",
+            "stack_height": 0.2
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          }
+        ],
+        "board_size": 5,
+        "player1_flats": 17,
+        "player1_capstones": 1,
+        "player2_flats": 17,
+        "player2_capstones": 1,
+        "turn": 0,
+        "heuristics": {
+          "flat_diff": 0,
+          "center_control": -1,
+          "stack_control": 0,
+          "road_potential": 1,
+          "capstone_value": 0
+        }
+      },
+      "ai_heuristic_value": [
+        20.4258,
+        3.87488
+      ]
+    },
+    {
+      "move_number": 8,
+      "player": 1,
+      "move": "Fb4",
+      "move_vector": [
+        0,
+        0,
+        1,
+        3,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "board_state": {
+        "board": [
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.2
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000001",
+            "type_encoding": "00",
+            "stack_height": 0.2
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.2
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000001",
+            "type_encoding": "00",
+            "stack_height": 0.2
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.2
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000001",
+            "type_encoding": "00",
+            "stack_height": 0.2
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.2
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.2
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000001",
+            "type_encoding": "00",
+            "stack_height": 0.2
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          }
+        ],
+        "board_size": 5,
+        "player1_flats": 16,
+        "player1_capstones": 1,
+        "player2_flats": 17,
+        "player2_capstones": 1,
+        "turn": 1,
+        "heuristics": {
+          "flat_diff": 1,
+          "center_control": -1,
+          "stack_control": 1,
+          "road_potential": 2,
+          "capstone_value": 0
+        }
+      },
+      "ai_heuristic_value": [
+        -9.30307,
+        14.822
+      ]
+    },
+    {
+      "move_number": 9,
+      "player": 2,
+      "move": "1a5-1",
+      "move_vector": [
+        1,
+        1,
+        0,
+        4,
+        3,
+        1,
+        0,
+        0,
+        0
+      ],
+      "board_state": {
+        "board": [
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.2
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000001",
+            "type_encoding": "00",
+            "stack_height": 0.2
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.2
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000001",
+            "type_encoding": "00",
+            "stack_height": 0.2
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.2
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000001",
+            "type_encoding": "00",
+            "stack_height": 0.2
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000001",
+            "type_encoding": "00",
+            "stack_height": 0.4
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.2
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          }
+        ],
+        "board_size": 5,
+        "player1_flats": 16,
+        "player1_capstones": 1,
+        "player2_flats": 17,
+        "player2_capstones": 1,
+        "turn": 0,
+        "heuristics": {
+          "flat_diff": 1,
+          "center_control": -1,
+          "stack_control": -1,
+          "road_potential": 0,
+          "capstone_value": 0
+        }
+      },
+      "ai_heuristic_value": [
+        -20.2931,
+        -9.28647
+      ]
+    },
+    {
+      "move_number": 10,
+      "player": 1,
+      "move": "Fb3",
+      "move_vector": [
+        0,
+        0,
+        1,
+        2,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "board_state": {
+        "board": [
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.2
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000001",
+            "type_encoding": "00",
+            "stack_height": 0.2
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.2
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000001",
+            "type_encoding": "00",
+            "stack_height": 0.2
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.2
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.2
+          },
+          {
+            "color_encoding": "000001",
+            "type_encoding": "00",
+            "stack_height": 0.2
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000001",
+            "type_encoding": "00",
+            "stack_height": 0.4
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.2
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          }
+        ],
+        "board_size": 5,
+        "player1_flats": 15,
+        "player1_capstones": 1,
+        "player2_flats": 17,
+        "player2_capstones": 1,
+        "turn": 1,
+        "heuristics": {
+          "flat_diff": 2,
+          "center_control": -1,
+          "stack_control": 0,
+          "road_potential": 2,
+          "capstone_value": 0
+        }
+      },
+      "ai_heuristic_value": [
+        11.6742,
+        27.2569
+      ]
+    },
+    {
+      "move_number": 11,
+      "player": 2,
+      "move": "Fb5",
+      "move_vector": [
+        0,
+        0,
+        1,
+        4,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "board_state": {
+        "board": [
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.2
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000001",
+            "type_encoding": "00",
+            "stack_height": 0.2
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.2
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000001",
+            "type_encoding": "00",
+            "stack_height": 0.2
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.2
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.2
+          },
+          {
+            "color_encoding": "000001",
+            "type_encoding": "00",
+            "stack_height": 0.2
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000001",
+            "type_encoding": "00",
+            "stack_height": 0.4
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.2
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000001",
+            "type_encoding": "00",
+            "stack_height": 0.2
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          }
+        ],
+        "board_size": 5,
+        "player1_flats": 15,
+        "player1_capstones": 1,
+        "player2_flats": 16,
+        "player2_capstones": 1,
+        "turn": 0,
+        "heuristics": {
+          "flat_diff": 1,
+          "center_control": -1,
+          "stack_control": -1,
+          "road_potential": 2,
+          "capstone_value": 0
+        }
+      },
+      "ai_heuristic_value": [
+        -10.7728,
+        -18.2264
+      ]
+    },
+    {
+      "move_number": 12,
+      "player": 1,
+      "move": "Ca5",
+      "move_vector": [
+        0,
+        2,
+        0,
+        4,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "board_state": {
+        "board": [
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.2
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000001",
+            "type_encoding": "00",
+            "stack_height": 0.2
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.2
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000001",
+            "type_encoding": "00",
+            "stack_height": 0.2
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.2
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.2
+          },
+          {
+            "color_encoding": "000001",
+            "type_encoding": "00",
+            "stack_height": 0.2
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000001",
+            "type_encoding": "00",
+            "stack_height": 0.4
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.2
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "10",
+            "stack_height": 0.2
+          },
+          {
+            "color_encoding": "000001",
+            "type_encoding": "00",
+            "stack_height": 0.2
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          }
+        ],
+        "board_size": 5,
+        "player1_flats": 15,
+        "player1_capstones": 0,
+        "player2_flats": 16,
+        "player2_capstones": 1,
+        "turn": 1,
+        "heuristics": {
+          "flat_diff": 1,
+          "center_control": -1,
+          "stack_control": 0,
+          "road_potential": 2,
+          "capstone_value": 1
+        }
+      },
+      "ai_heuristic_value": [
+        13.778,
+        67.7599
+      ]
+    },
+    {
+      "move_number": 13,
+      "player": 2,
+      "move": "2a4-2",
+      "move_vector": [
+        1,
+        2,
+        0,
+        3,
+        3,
+        2,
+        0,
+        0,
+        0
+      ],
+      "board_state": {
+        "board": [
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.2
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000001",
+            "type_encoding": "00",
+            "stack_height": 0.2
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.2
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000001",
+            "type_encoding": "00",
+            "stack_height": 0.2
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000001",
+            "type_encoding": "00",
+            "stack_height": 0.6
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.2
+          },
+          {
+            "color_encoding": "000001",
+            "type_encoding": "00",
+            "stack_height": 0.2
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.2
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "10",
+            "stack_height": 0.2
+          },
+          {
+            "color_encoding": "000001",
+            "type_encoding": "00",
+            "stack_height": 0.2
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          }
+        ],
+        "board_size": 5,
+        "player1_flats": 15,
+        "player1_capstones": 0,
+        "player2_flats": 16,
+        "player2_capstones": 1,
+        "turn": 0,
+        "heuristics": {
+          "flat_diff": 1,
+          "center_control": -1,
+          "stack_control": -2,
+          "road_potential": 0,
+          "capstone_value": 1
+        }
+      },
+      "ai_heuristic_value": [
+        -38.6976,
+        -56.2672
+      ]
+    },
+    {
+      "move_number": 14,
+      "player": 1,
+      "move": "1b3<1",
+      "move_vector": [
+        1,
+        1,
+        1,
+        2,
+        1,
+        1,
+        0,
+        0,
+        0
+      ],
+      "board_state": {
+        "board": [
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.2
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000001",
+            "type_encoding": "00",
+            "stack_height": 0.2
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.2
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000001",
+            "type_encoding": "00",
+            "stack_height": 0.2
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000010",
+            "type_encoding": "00",
+            "stack_height": 0.8
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000001",
+            "type_encoding": "00",
+            "stack_height": 0.2
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.2
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "10",
+            "stack_height": 0.2
+          },
+          {
+            "color_encoding": "000001",
+            "type_encoding": "00",
+            "stack_height": 0.2
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          }
+        ],
+        "board_size": 5,
+        "player1_flats": 15,
+        "player1_capstones": 0,
+        "player2_flats": 16,
+        "player2_capstones": 1,
+        "turn": 1,
+        "heuristics": {
+          "flat_diff": 1,
+          "center_control": -1,
+          "stack_control": 4,
+          "road_potential": 0,
+          "capstone_value": 1
+        }
+      },
+      "ai_heuristic_value": [
+        -3.84818,
+        387.763
+      ]
+    },
+    {
+      "move_number": 15,
+      "player": 2,
+      "move": "Ca4",
+      "move_vector": [
+        0,
+        2,
+        0,
+        3,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "board_state": {
+        "board": [
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.2
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000001",
+            "type_encoding": "00",
+            "stack_height": 0.2
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.2
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000001",
+            "type_encoding": "00",
+            "stack_height": 0.2
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000010",
+            "type_encoding": "00",
+            "stack_height": 0.8
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000001",
+            "type_encoding": "00",
+            "stack_height": 0.2
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000001",
+            "type_encoding": "10",
+            "stack_height": 0.2
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.2
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "10",
+            "stack_height": 0.2
+          },
+          {
+            "color_encoding": "000001",
+            "type_encoding": "00",
+            "stack_height": 0.2
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          }
+        ],
+        "board_size": 5,
+        "player1_flats": 15,
+        "player1_capstones": 0,
+        "player2_flats": 16,
+        "player2_capstones": 0,
+        "turn": 0,
+        "heuristics": {
+          "flat_diff": 1,
+          "center_control": -1,
+          "stack_control": 3,
+          "road_potential": 0,
+          "capstone_value": -1
+        }
+      },
+      "ai_heuristic_value": [
+        15.3398,
+        -232.885
+      ]
+    },
+    {
+      "move_number": 16,
+      "player": 1,
+      "move": "4a3>13",
+      "move_vector": [
+        1,
+        4,
+        0,
+        2,
+        0,
+        1,
+        3,
+        0,
+        0
+      ],
+      "board_state": {
+        "board": [
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.2
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000001",
+            "type_encoding": "00",
+            "stack_height": 0.2
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.2
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000001",
+            "type_encoding": "00",
+            "stack_height": 0.2
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.2
+          },
+          {
+            "color_encoding": "001010",
+            "type_encoding": "00",
+            "stack_height": 0.8
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000001",
+            "type_encoding": "10",
+            "stack_height": 0.2
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.2
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "10",
+            "stack_height": 0.2
+          },
+          {
+            "color_encoding": "000001",
+            "type_encoding": "00",
+            "stack_height": 0.2
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          }
+        ],
+        "board_size": 5,
+        "player1_flats": 15,
+        "player1_capstones": 0,
+        "player2_flats": 16,
+        "player2_capstones": 0,
+        "turn": 1,
+        "heuristics": {
+          "flat_diff": 1,
+          "center_control": 1,
+          "stack_control": 5,
+          "road_potential": 2,
+          "capstone_value": -1
+        }
+      },
+      "ai_heuristic_value": [
+        -30.8238,
+        453.206
+      ]
+    },
+    {
+      "move_number": 17,
+      "player": 2,
+      "move": "Fb2",
+      "move_vector": [
+        0,
+        0,
+        1,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "board_state": {
+        "board": [
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.2
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000001",
+            "type_encoding": "00",
+            "stack_height": 0.2
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.2
+          },
+          {
+            "color_encoding": "000001",
+            "type_encoding": "00",
+            "stack_height": 0.2
+          },
+          {
+            "color_encoding": "000001",
+            "type_encoding": "00",
+            "stack_height": 0.2
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.2
+          },
+          {
+            "color_encoding": "001010",
+            "type_encoding": "00",
+            "stack_height": 0.8
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000001",
+            "type_encoding": "10",
+            "stack_height": 0.2
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.2
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "10",
+            "stack_height": 0.2
+          },
+          {
+            "color_encoding": "000001",
+            "type_encoding": "00",
+            "stack_height": 0.2
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          }
+        ],
+        "board_size": 5,
+        "player1_flats": 15,
+        "player1_capstones": 0,
+        "player2_flats": 15,
+        "player2_capstones": 0,
+        "turn": 0,
+        "heuristics": {
+          "flat_diff": 0,
+          "center_control": 1,
+          "stack_control": 4,
+          "road_potential": 1,
+          "capstone_value": -1
+        }
+      },
+      "ai_heuristic_value": [
+        -8.16968,
+        -410.136
+      ]
+    },
+    {
+      "move_number": 18,
+      "player": 1,
+      "move": "4c3-22",
+      "move_vector": [
+        1,
+        4,
+        2,
+        2,
+        3,
+        2,
+        2,
+        0,
+        0
+      ],
+      "board_state": {
+        "board": [
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.2
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000110",
+            "type_encoding": "00",
+            "stack_height": 0.6
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.2
+          },
+          {
+            "color_encoding": "000001",
+            "type_encoding": "00",
+            "stack_height": 0.2
+          },
+          {
+            "color_encoding": "000110",
+            "type_encoding": "00",
+            "stack_height": 0.6
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.2
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000001",
+            "type_encoding": "10",
+            "stack_height": 0.2
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.2
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "10",
+            "stack_height": 0.2
+          },
+          {
+            "color_encoding": "000001",
+            "type_encoding": "00",
+            "stack_height": 0.2
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          }
+        ],
+        "board_size": 5,
+        "player1_flats": 15,
+        "player1_capstones": 0,
+        "player2_flats": 15,
+        "player2_capstones": 0,
+        "turn": 1,
+        "heuristics": {
+          "flat_diff": 0,
+          "center_control": 0,
+          "stack_control": 8,
+          "road_potential": 3,
+          "capstone_value": -1
+        }
+      },
+      "ai_heuristic_value": [
+        198.8,
+        611.785
+      ]
+    },
+    {
+      "move_number": 19,
+      "player": 2,
+      "move": "Fb1",
+      "move_vector": [
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "board_state": {
+        "board": [
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.2
+          },
+          {
+            "color_encoding": "000001",
+            "type_encoding": "00",
+            "stack_height": 0.2
+          },
+          {
+            "color_encoding": "000110",
+            "type_encoding": "00",
+            "stack_height": 0.6
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.2
+          },
+          {
+            "color_encoding": "000001",
+            "type_encoding": "00",
+            "stack_height": 0.2
+          },
+          {
+            "color_encoding": "000110",
+            "type_encoding": "00",
+            "stack_height": 0.6
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.2
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000001",
+            "type_encoding": "10",
+            "stack_height": 0.2
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.2
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "10",
+            "stack_height": 0.2
+          },
+          {
+            "color_encoding": "000001",
+            "type_encoding": "00",
+            "stack_height": 0.2
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          }
+        ],
+        "board_size": 5,
+        "player1_flats": 15,
+        "player1_capstones": 0,
+        "player2_flats": 14,
+        "player2_capstones": 0,
+        "turn": 0,
+        "heuristics": {
+          "flat_diff": -1,
+          "center_control": 0,
+          "stack_control": 7,
+          "road_potential": 2,
+          "capstone_value": -1
+        }
+      },
+      "ai_heuristic_value": [
+        -193.273,
+        -596.914
+      ]
+    },
+    {
+      "move_number": 20,
+      "player": 1,
+      "move": "Fa3",
+      "move_vector": [
+        0,
+        0,
+        0,
+        2,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "board_state": {
+        "board": [
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.2
+          },
+          {
+            "color_encoding": "000001",
+            "type_encoding": "00",
+            "stack_height": 0.2
+          },
+          {
+            "color_encoding": "000110",
+            "type_encoding": "00",
+            "stack_height": 0.6
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.2
+          },
+          {
+            "color_encoding": "000001",
+            "type_encoding": "00",
+            "stack_height": 0.2
+          },
+          {
+            "color_encoding": "000110",
+            "type_encoding": "00",
+            "stack_height": 0.6
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.2
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.2
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000001",
+            "type_encoding": "10",
+            "stack_height": 0.2
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.2
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "10",
+            "stack_height": 0.2
+          },
+          {
+            "color_encoding": "000001",
+            "type_encoding": "00",
+            "stack_height": 0.2
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          }
+        ],
+        "board_size": 5,
+        "player1_flats": 14,
+        "player1_capstones": 0,
+        "player2_flats": 14,
+        "player2_capstones": 0,
+        "turn": 1,
+        "heuristics": {
+          "flat_diff": 0,
+          "center_control": 0,
+          "stack_control": 8,
+          "road_potential": 4,
+          "capstone_value": -1
+        }
+      },
+      "ai_heuristic_value": [
+        582.19,
+        574.167
+      ]
+    },
+    {
+      "move_number": 21,
+      "player": 2,
+      "move": "1a4-1",
+      "move_vector": [
+        1,
+        1,
+        0,
+        3,
+        3,
+        1,
+        0,
+        0,
+        0
+      ],
+      "board_state": {
+        "board": [
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.2
+          },
+          {
+            "color_encoding": "000001",
+            "type_encoding": "00",
+            "stack_height": 0.2
+          },
+          {
+            "color_encoding": "000110",
+            "type_encoding": "00",
+            "stack_height": 0.6
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.2
+          },
+          {
+            "color_encoding": "000001",
+            "type_encoding": "00",
+            "stack_height": 0.2
+          },
+          {
+            "color_encoding": "000110",
+            "type_encoding": "00",
+            "stack_height": 0.6
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000001",
+            "type_encoding": "10",
+            "stack_height": 0.4
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.2
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.2
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "10",
+            "stack_height": 0.2
+          },
+          {
+            "color_encoding": "000001",
+            "type_encoding": "00",
+            "stack_height": 0.2
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          }
+        ],
+        "board_size": 5,
+        "player1_flats": 14,
+        "player1_capstones": 0,
+        "player2_flats": 14,
+        "player2_capstones": 0,
+        "turn": 0,
+        "heuristics": {
+          "flat_diff": 0,
+          "center_control": 0,
+          "stack_control": 6,
+          "road_potential": 2,
+          "capstone_value": -2
+        }
+      },
+      "ai_heuristic_value": [
+        -583.862,
+        -598.796
+      ]
+    },
+    {
+      "move_number": 22,
+      "player": 1,
+      "move": "Fa4",
+      "move_vector": [
+        0,
+        0,
+        0,
+        3,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "board_state": {
+        "board": [
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.2
+          },
+          {
+            "color_encoding": "000001",
+            "type_encoding": "00",
+            "stack_height": 0.2
+          },
+          {
+            "color_encoding": "000110",
+            "type_encoding": "00",
+            "stack_height": 0.6
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.2
+          },
+          {
+            "color_encoding": "000001",
+            "type_encoding": "00",
+            "stack_height": 0.2
+          },
+          {
+            "color_encoding": "000110",
+            "type_encoding": "00",
+            "stack_height": 0.6
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000001",
+            "type_encoding": "10",
+            "stack_height": 0.4
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.2
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.2
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.2
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "10",
+            "stack_height": 0.2
+          },
+          {
+            "color_encoding": "000001",
+            "type_encoding": "00",
+            "stack_height": 0.2
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          }
+        ],
+        "board_size": 5,
+        "player1_flats": 13,
+        "player1_capstones": 0,
+        "player2_flats": 14,
+        "player2_capstones": 0,
+        "turn": 1,
+        "heuristics": {
+          "flat_diff": 1,
+          "center_control": 0,
+          "stack_control": 7,
+          "road_potential": 4,
+          "capstone_value": -2
+        }
+      },
+      "ai_heuristic_value": [
+        593.014,
+        613.553
+      ]
+    },
+    {
+      "move_number": 23,
+      "player": 2,
+      "move": "1b5-1",
+      "move_vector": [
+        1,
+        1,
+        1,
+        4,
+        3,
+        1,
+        0,
+        0,
+        0
+      ],
+      "board_state": {
+        "board": [
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.2
+          },
+          {
+            "color_encoding": "000001",
+            "type_encoding": "00",
+            "stack_height": 0.2
+          },
+          {
+            "color_encoding": "000110",
+            "type_encoding": "00",
+            "stack_height": 0.6
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.2
+          },
+          {
+            "color_encoding": "000001",
+            "type_encoding": "00",
+            "stack_height": 0.2
+          },
+          {
+            "color_encoding": "000110",
+            "type_encoding": "00",
+            "stack_height": 0.6
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000001",
+            "type_encoding": "10",
+            "stack_height": 0.4
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.2
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.2
+          },
+          {
+            "color_encoding": "000001",
+            "type_encoding": "00",
+            "stack_height": 0.4
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "10",
+            "stack_height": 0.2
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          }
+        ],
+        "board_size": 5,
+        "player1_flats": 13,
+        "player1_capstones": 0,
+        "player2_flats": 14,
+        "player2_capstones": 0,
+        "turn": 0,
+        "heuristics": {
+          "flat_diff": 1,
+          "center_control": 0,
+          "stack_control": 5,
+          "road_potential": 2,
+          "capstone_value": -2
+        }
+      },
+      "ai_heuristic_value": [
+        -597.685,
+        -635.5
+      ]
+    },
+    {
+      "move_number": 24,
+      "player": 1,
+      "move": "Fc4",
+      "move_vector": [
+        0,
+        0,
+        2,
+        3,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "board_state": {
+        "board": [
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.2
+          },
+          {
+            "color_encoding": "000001",
+            "type_encoding": "00",
+            "stack_height": 0.2
+          },
+          {
+            "color_encoding": "000110",
+            "type_encoding": "00",
+            "stack_height": 0.6
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.2
+          },
+          {
+            "color_encoding": "000001",
+            "type_encoding": "00",
+            "stack_height": 0.2
+          },
+          {
+            "color_encoding": "000110",
+            "type_encoding": "00",
+            "stack_height": 0.6
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000001",
+            "type_encoding": "10",
+            "stack_height": 0.4
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.2
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.2
+          },
+          {
+            "color_encoding": "000001",
+            "type_encoding": "00",
+            "stack_height": 0.4
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.2
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "10",
+            "stack_height": 0.2
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          }
+        ],
+        "board_size": 5,
+        "player1_flats": 12,
+        "player1_capstones": 0,
+        "player2_flats": 14,
+        "player2_capstones": 0,
+        "turn": 1,
+        "heuristics": {
+          "flat_diff": 2,
+          "center_control": 0,
+          "stack_control": 6,
+          "road_potential": 2,
+          "capstone_value": -2
+        }
+      },
+      "ai_heuristic_value": [
+        598.287,
+        619.118
+      ]
+    },
+    {
+      "move_number": 25,
+      "player": 2,
+      "move": "1b1>1",
+      "move_vector": [
+        1,
+        1,
+        1,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0
+      ],
+      "board_state": {
+        "board": [
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.2
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "001101",
+            "type_encoding": "00",
+            "stack_height": 0.8
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.2
+          },
+          {
+            "color_encoding": "000001",
+            "type_encoding": "00",
+            "stack_height": 0.2
+          },
+          {
+            "color_encoding": "000110",
+            "type_encoding": "00",
+            "stack_height": 0.6
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000001",
+            "type_encoding": "10",
+            "stack_height": 0.4
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.2
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.2
+          },
+          {
+            "color_encoding": "000001",
+            "type_encoding": "00",
+            "stack_height": 0.4
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.2
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "10",
+            "stack_height": 0.2
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          }
+        ],
+        "board_size": 5,
+        "player1_flats": 12,
+        "player1_capstones": 0,
+        "player2_flats": 14,
+        "player2_capstones": 0,
+        "turn": 0,
+        "heuristics": {
+          "flat_diff": 2,
+          "center_control": 0,
+          "stack_control": 0,
+          "road_potential": 2,
+          "capstone_value": -2
+        }
+      },
+      "ai_heuristic_value": [
+        -615.224,
+        -617.899
+      ]
+    },
+    {
+      "move_number": 26,
+      "player": 1,
+      "move": "3c2-3",
+      "move_vector": [
+        1,
+        3,
+        2,
+        1,
+        3,
+        3,
+        0,
+        0,
+        0
+      ],
+      "board_state": {
+        "board": [
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.2
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "101110",
+            "type_encoding": "00",
+            "stack_height": 1.4
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.2
+          },
+          {
+            "color_encoding": "000001",
+            "type_encoding": "00",
+            "stack_height": 0.2
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000001",
+            "type_encoding": "10",
+            "stack_height": 0.4
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.2
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.2
+          },
+          {
+            "color_encoding": "000001",
+            "type_encoding": "00",
+            "stack_height": 0.4
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.2
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "10",
+            "stack_height": 0.2
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          }
+        ],
+        "board_size": 5,
+        "player1_flats": 12,
+        "player1_capstones": 0,
+        "player2_flats": 14,
+        "player2_capstones": 0,
+        "turn": 1,
+        "heuristics": {
+          "flat_diff": 2,
+          "center_control": 0,
+          "stack_control": 8,
+          "road_potential": 2,
+          "capstone_value": -2
+        }
+      },
+      "ai_heuristic_value": [
+        624.627,
+        628.461
+      ]
+    },
+    {
+      "move_number": 27,
+      "player": 2,
+      "move": "Fc3",
+      "move_vector": [
+        0,
+        0,
+        2,
+        2,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "board_state": {
+        "board": [
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.2
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "101110",
+            "type_encoding": "00",
+            "stack_height": 1.4
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.2
+          },
+          {
+            "color_encoding": "000001",
+            "type_encoding": "00",
+            "stack_height": 0.2
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000001",
+            "type_encoding": "10",
+            "stack_height": 0.4
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.2
+          },
+          {
+            "color_encoding": "000001",
+            "type_encoding": "00",
+            "stack_height": 0.2
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.2
+          },
+          {
+            "color_encoding": "000001",
+            "type_encoding": "00",
+            "stack_height": 0.4
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.2
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "10",
+            "stack_height": 0.2
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          }
+        ],
+        "board_size": 5,
+        "player1_flats": 12,
+        "player1_capstones": 0,
+        "player2_flats": 13,
+        "player2_capstones": 0,
+        "turn": 0,
+        "heuristics": {
+          "flat_diff": 1,
+          "center_control": -1,
+          "stack_control": 7,
+          "road_potential": 2,
+          "capstone_value": -2
+        }
+      },
+      "ai_heuristic_value": [
+        -677.419,
+        -654.222
+      ]
+    },
+    {
+      "move_number": 28,
+      "player": 1,
+      "move": "1b3+1",
+      "move_vector": [
+        1,
+        1,
+        1,
+        2,
+        2,
+        1,
+        0,
+        0,
+        0
+      ],
+      "board_state": {
+        "board": [
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.2
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "101110",
+            "type_encoding": "00",
+            "stack_height": 1.4
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.2
+          },
+          {
+            "color_encoding": "000001",
+            "type_encoding": "00",
+            "stack_height": 0.2
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000001",
+            "type_encoding": "10",
+            "stack_height": 0.4
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000001",
+            "type_encoding": "00",
+            "stack_height": 0.2
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.2
+          },
+          {
+            "color_encoding": "000010",
+            "type_encoding": "00",
+            "stack_height": 0.6
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.2
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "10",
+            "stack_height": 0.2
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          }
+        ],
+        "board_size": 5,
+        "player1_flats": 12,
+        "player1_capstones": 0,
+        "player2_flats": 13,
+        "player2_capstones": 0,
+        "turn": 1,
+        "heuristics": {
+          "flat_diff": 1,
+          "center_control": -1,
+          "stack_control": 11,
+          "road_potential": 4,
+          "capstone_value": -2
+        }
+      },
+      "ai_heuristic_value": [
+        609.679,
+        621.329
+      ]
+    },
+    {
+      "move_number": 29,
+      "player": 2,
+      "move": "1b2<1",
+      "move_vector": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        0,
+        0,
+        0
+      ],
+      "board_state": {
+        "board": [
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.2
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "101110",
+            "type_encoding": "00",
+            "stack_height": 1.4
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000001",
+            "type_encoding": "00",
+            "stack_height": 0.4
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000001",
+            "type_encoding": "10",
+            "stack_height": 0.4
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000001",
+            "type_encoding": "00",
+            "stack_height": 0.2
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.2
+          },
+          {
+            "color_encoding": "000010",
+            "type_encoding": "00",
+            "stack_height": 0.6
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.2
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "10",
+            "stack_height": 0.2
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          }
+        ],
+        "board_size": 5,
+        "player1_flats": 12,
+        "player1_capstones": 0,
+        "player2_flats": 13,
+        "player2_capstones": 0,
+        "turn": 0,
+        "heuristics": {
+          "flat_diff": 1,
+          "center_control": -1,
+          "stack_control": 9,
+          "road_potential": 2,
+          "capstone_value": -2
+        }
+      },
+      "ai_heuristic_value": [
+        -616.546,
+        -671.005
+      ]
+    },
+    {
+      "move_number": 30,
+      "player": 1,
+      "move": "Fc5",
+      "move_vector": [
+        0,
+        0,
+        2,
+        4,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "board_state": {
+        "board": [
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.2
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "101110",
+            "type_encoding": "00",
+            "stack_height": 1.4
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000001",
+            "type_encoding": "00",
+            "stack_height": 0.4
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000001",
+            "type_encoding": "10",
+            "stack_height": 0.4
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000001",
+            "type_encoding": "00",
+            "stack_height": 0.2
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.2
+          },
+          {
+            "color_encoding": "000010",
+            "type_encoding": "00",
+            "stack_height": 0.6
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.2
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "10",
+            "stack_height": 0.2
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.2
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          }
+        ],
+        "board_size": 5,
+        "player1_flats": 11,
+        "player1_capstones": 0,
+        "player2_flats": 13,
+        "player2_capstones": 0,
+        "turn": 1,
+        "heuristics": {
+          "flat_diff": 2,
+          "center_control": -1,
+          "stack_control": 10,
+          "road_potential": 3,
+          "capstone_value": -2
+        }
+      },
+      "ai_heuristic_value": [
+        612.961,
+        644.215
+      ]
+    },
+    {
+      "move_number": 31,
+      "player": 2,
+      "move": "Fe2",
+      "move_vector": [
+        0,
+        0,
+        4,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "board_state": {
+        "board": [
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.2
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "101110",
+            "type_encoding": "00",
+            "stack_height": 1.4
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000001",
+            "type_encoding": "00",
+            "stack_height": 0.4
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000001",
+            "type_encoding": "00",
+            "stack_height": 0.2
+          },
+          {
+            "color_encoding": "000001",
+            "type_encoding": "10",
+            "stack_height": 0.4
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000001",
+            "type_encoding": "00",
+            "stack_height": 0.2
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.2
+          },
+          {
+            "color_encoding": "000010",
+            "type_encoding": "00",
+            "stack_height": 0.6
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.2
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "10",
+            "stack_height": 0.2
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.2
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          }
+        ],
+        "board_size": 5,
+        "player1_flats": 11,
+        "player1_capstones": 0,
+        "player2_flats": 12,
+        "player2_capstones": 0,
+        "turn": 0,
+        "heuristics": {
+          "flat_diff": 1,
+          "center_control": -1,
+          "stack_control": 9,
+          "road_potential": 3,
+          "capstone_value": -2
+        }
+      },
+      "ai_heuristic_value": [
+        -653.755,
+        -688.153
+      ]
+    },
+    {
+      "move_number": 32,
+      "player": 1,
+      "move": "Fb1",
+      "move_vector": [
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "board_state": {
+        "board": [
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.2
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.2
+          },
+          {
+            "color_encoding": "101110",
+            "type_encoding": "00",
+            "stack_height": 1.4
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000001",
+            "type_encoding": "00",
+            "stack_height": 0.4
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000001",
+            "type_encoding": "00",
+            "stack_height": 0.2
+          },
+          {
+            "color_encoding": "000001",
+            "type_encoding": "10",
+            "stack_height": 0.4
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000001",
+            "type_encoding": "00",
+            "stack_height": 0.2
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.2
+          },
+          {
+            "color_encoding": "000010",
+            "type_encoding": "00",
+            "stack_height": 0.6
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.2
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "10",
+            "stack_height": 0.2
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.2
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          }
+        ],
+        "board_size": 5,
+        "player1_flats": 10,
+        "player1_capstones": 0,
+        "player2_flats": 12,
+        "player2_capstones": 0,
+        "turn": 1,
+        "heuristics": {
+          "flat_diff": 2,
+          "center_control": -1,
+          "stack_control": 10,
+          "road_potential": 5,
+          "capstone_value": -2
+        }
+      },
+      "ai_heuristic_value": [
+        661.586,
+        676.948
+      ]
+    },
+    {
+      "move_number": 33,
+      "player": 2,
+      "move": "2a3+2",
+      "move_vector": [
+        1,
+        2,
+        0,
+        2,
+        2,
+        2,
+        0,
+        0,
+        0
+      ],
+      "board_state": {
+        "board": [
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.2
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.2
+          },
+          {
+            "color_encoding": "101110",
+            "type_encoding": "00",
+            "stack_height": 1.4
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000001",
+            "type_encoding": "00",
+            "stack_height": 0.4
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000001",
+            "type_encoding": "00",
+            "stack_height": 0.2
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000001",
+            "type_encoding": "00",
+            "stack_height": 0.2
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000001",
+            "type_encoding": "10",
+            "stack_height": 0.6
+          },
+          {
+            "color_encoding": "000010",
+            "type_encoding": "00",
+            "stack_height": 0.6
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.2
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "10",
+            "stack_height": 0.2
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.2
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          }
+        ],
+        "board_size": 5,
+        "player1_flats": 10,
+        "player1_capstones": 0,
+        "player2_flats": 12,
+        "player2_capstones": 0,
+        "turn": 0,
+        "heuristics": {
+          "flat_diff": 2,
+          "center_control": -1,
+          "stack_control": 8,
+          "road_potential": 4,
+          "capstone_value": -1
+        }
+      },
+      "ai_heuristic_value": [
+        -682.629,
+        -697.973
+      ]
+    },
+    {
+      "move_number": 34,
+      "player": 1,
+      "move": "Fc2",
+      "move_vector": [
+        0,
+        0,
+        2,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "board_state": {
+        "board": [
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.2
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.2
+          },
+          {
+            "color_encoding": "101110",
+            "type_encoding": "00",
+            "stack_height": 1.4
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000001",
+            "type_encoding": "00",
+            "stack_height": 0.4
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.2
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000001",
+            "type_encoding": "00",
+            "stack_height": 0.2
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000001",
+            "type_encoding": "00",
+            "stack_height": 0.2
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000001",
+            "type_encoding": "10",
+            "stack_height": 0.6
+          },
+          {
+            "color_encoding": "000010",
+            "type_encoding": "00",
+            "stack_height": 0.6
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.2
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "10",
+            "stack_height": 0.2
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.2
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          }
+        ],
+        "board_size": 5,
+        "player1_flats": 9,
+        "player1_capstones": 0,
+        "player2_flats": 12,
+        "player2_capstones": 0,
+        "turn": 1,
+        "heuristics": {
+          "flat_diff": 3,
+          "center_control": -1,
+          "stack_control": 9,
+          "road_potential": 5,
+          "capstone_value": -1
+        }
+      },
+      "ai_heuristic_value": [
+        687.356,
+        711.076
+      ]
+    },
+    {
+      "move_number": 35,
+      "player": 2,
+      "move": "2a2-2",
+      "move_vector": [
+        1,
+        2,
+        0,
+        1,
+        3,
+        2,
+        0,
+        0,
+        0
+      ],
+      "board_state": {
+        "board": [
+          {
+            "color_encoding": "000001",
+            "type_encoding": "00",
+            "stack_height": 0.6
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.2
+          },
+          {
+            "color_encoding": "101110",
+            "type_encoding": "00",
+            "stack_height": 1.4
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.2
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000001",
+            "type_encoding": "00",
+            "stack_height": 0.2
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000001",
+            "type_encoding": "00",
+            "stack_height": 0.2
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000001",
+            "type_encoding": "10",
+            "stack_height": 0.6
+          },
+          {
+            "color_encoding": "000010",
+            "type_encoding": "00",
+            "stack_height": 0.6
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.2
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "10",
+            "stack_height": 0.2
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.2
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          }
+        ],
+        "board_size": 5,
+        "player1_flats": 9,
+        "player1_capstones": 0,
+        "player2_flats": 12,
+        "player2_capstones": 0,
+        "turn": 0,
+        "heuristics": {
+          "flat_diff": 3,
+          "center_control": -1,
+          "stack_control": 7,
+          "road_potential": 4,
+          "capstone_value": -1
+        }
+      },
+      "ai_heuristic_value": [
+        -703.284,
+        -733.661
+      ]
+    },
+    {
+      "move_number": 36,
+      "player": 1,
+      "move": "1c2+1",
+      "move_vector": [
+        1,
+        1,
+        2,
+        1,
+        2,
+        1,
+        0,
+        0,
+        0
+      ],
+      "board_state": {
+        "board": [
+          {
+            "color_encoding": "000001",
+            "type_encoding": "00",
+            "stack_height": 0.6
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.2
+          },
+          {
+            "color_encoding": "101110",
+            "type_encoding": "00",
+            "stack_height": 1.4
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000001",
+            "type_encoding": "00",
+            "stack_height": 0.2
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000010",
+            "type_encoding": "00",
+            "stack_height": 0.4
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000001",
+            "type_encoding": "10",
+            "stack_height": 0.6
+          },
+          {
+            "color_encoding": "000010",
+            "type_encoding": "00",
+            "stack_height": 0.6
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.2
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "10",
+            "stack_height": 0.2
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.2
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          }
+        ],
+        "board_size": 5,
+        "player1_flats": 9,
+        "player1_capstones": 0,
+        "player2_flats": 12,
+        "player2_capstones": 0,
+        "turn": 1,
+        "heuristics": {
+          "flat_diff": 3,
+          "center_control": 1,
+          "stack_control": 9,
+          "road_potential": 4,
+          "capstone_value": -1
+        }
+      },
+      "ai_heuristic_value": [
+        708.813,
+        911.203
+      ]
+    },
+    {
+      "move_number": 37,
+      "player": 2,
+      "move": "3a4>12",
+      "move_vector": [
+        1,
+        3,
+        0,
+        3,
+        0,
+        1,
+        2,
+        0,
+        0
+      ],
+      "board_state": {
+        "board": [
+          {
+            "color_encoding": "000001",
+            "type_encoding": "00",
+            "stack_height": 0.6
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.2
+          },
+          {
+            "color_encoding": "101110",
+            "type_encoding": "00",
+            "stack_height": 1.4
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000001",
+            "type_encoding": "00",
+            "stack_height": 0.2
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000010",
+            "type_encoding": "00",
+            "stack_height": 0.4
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000100",
+            "type_encoding": "00",
+            "stack_height": 0.8
+          },
+          {
+            "color_encoding": "000001",
+            "type_encoding": "10",
+            "stack_height": 0.6
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "10",
+            "stack_height": 0.2
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.2
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          }
+        ],
+        "board_size": 5,
+        "player1_flats": 9,
+        "player1_capstones": 0,
+        "player2_flats": 12,
+        "player2_capstones": 0,
+        "turn": 0,
+        "heuristics": {
+          "flat_diff": 3,
+          "center_control": 1,
+          "stack_control": 9,
+          "road_potential": 1,
+          "capstone_value": -3
+        }
+      },
+      "ai_heuristic_value": [
+        -751.904,
+        -925.281
+      ]
+    },
+    {
+      "move_number": 38,
+      "player": 1,
+      "move": "3b4-21",
+      "move_vector": [
+        1,
+        3,
+        1,
+        3,
+        3,
+        2,
+        1,
+        0,
+        0
+      ],
+      "board_state": {
+        "board": [
+          {
+            "color_encoding": "000001",
+            "type_encoding": "00",
+            "stack_height": 0.6
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.2
+          },
+          {
+            "color_encoding": "101110",
+            "type_encoding": "00",
+            "stack_height": 1.4
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.2
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000001",
+            "type_encoding": "00",
+            "stack_height": 0.2
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000010",
+            "type_encoding": "00",
+            "stack_height": 0.4
+          },
+          {
+            "color_encoding": "000010",
+            "type_encoding": "00",
+            "stack_height": 0.4
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.2
+          },
+          {
+            "color_encoding": "000001",
+            "type_encoding": "10",
+            "stack_height": 0.6
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "10",
+            "stack_height": 0.2
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.2
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          }
+        ],
+        "board_size": 5,
+        "player1_flats": 9,
+        "player1_capstones": 0,
+        "player2_flats": 12,
+        "player2_capstones": 0,
+        "turn": 1,
+        "heuristics": {
+          "flat_diff": 3,
+          "center_control": 1,
+          "stack_control": 9,
+          "road_potential": 5,
+          "capstone_value": -3
+        }
+      },
+      "ai_heuristic_value": [
+        719.971,
+        901.573
+      ]
+    },
+    {
+      "move_number": 39,
+      "player": 2,
+      "move": "3c4<21",
+      "move_vector": [
+        1,
+        3,
+        2,
+        3,
+        1,
+        2,
+        1,
+        0,
+        0
+      ],
+      "board_state": {
+        "board": [
+          {
+            "color_encoding": "000001",
+            "type_encoding": "00",
+            "stack_height": 0.6
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.2
+          },
+          {
+            "color_encoding": "101110",
+            "type_encoding": "00",
+            "stack_height": 1.4
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.2
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000001",
+            "type_encoding": "00",
+            "stack_height": 0.2
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000010",
+            "type_encoding": "00",
+            "stack_height": 0.4
+          },
+          {
+            "color_encoding": "000010",
+            "type_encoding": "00",
+            "stack_height": 0.4
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000001",
+            "type_encoding": "10",
+            "stack_height": 0.2
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.6
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "10",
+            "stack_height": 0.2
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.2
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          }
+        ],
+        "board_size": 5,
+        "player1_flats": 9,
+        "player1_capstones": 0,
+        "player2_flats": 12,
+        "player2_capstones": 0,
+        "turn": 0,
+        "heuristics": {
+          "flat_diff": 3,
+          "center_control": 1,
+          "stack_control": 13,
+          "road_potential": 5,
+          "capstone_value": -1
+        }
+      },
+      "ai_heuristic_value": null
+    },
+    {
+      "move_number": 40,
+      "player": 1,
+      "move": "5c1+113",
+      "move_vector": [
+        1,
+        5,
+        2,
+        0,
+        2,
+        1,
+        1,
+        3,
+        0
+      ],
+      "board_state": {
+        "board": [
+          {
+            "color_encoding": "000001",
+            "type_encoding": "00",
+            "stack_height": 0.6
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.2
+          },
+          {
+            "color_encoding": "000011",
+            "type_encoding": "00",
+            "stack_height": 0.4
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.2
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.2
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000001",
+            "type_encoding": "00",
+            "stack_height": 0.2
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000010",
+            "type_encoding": "00",
+            "stack_height": 0.4
+          },
+          {
+            "color_encoding": "000101",
+            "type_encoding": "00",
+            "stack_height": 0.6
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000001",
+            "type_encoding": "10",
+            "stack_height": 0.2
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.6
+          },
+          {
+            "color_encoding": "000110",
+            "type_encoding": "00",
+            "stack_height": 0.6
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "10",
+            "stack_height": 0.2
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.2
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          },
+          {
+            "color_encoding": "000000",
+            "type_encoding": "00",
+            "stack_height": 0.0
+          }
+        ],
+        "board_size": 5,
+        "player1_flats": 9,
+        "player1_capstones": 0,
+        "player2_flats": 12,
+        "player2_capstones": 0,
+        "turn": 1,
+        "heuristics": {
+          "flat_diff": 3,
+          "center_control": -1,
+          "stack_control": 3,
+          "road_potential": 6,
+          "capstone_value": -1
+        }
+      },
+      "ai_heuristic_value": null
+    }
+  ],
+  "winner": 0,
+  "win_type": "road"
+}

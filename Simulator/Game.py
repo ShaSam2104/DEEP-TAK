@@ -1,7 +1,7 @@
 import sys,pdb
 from Board import Board
 from tkinter import *
-
+import copy
 class Game:
 
 	# Constants
@@ -230,6 +230,19 @@ class Game:
 			return winner
 		return 1
 
+	def clone(self):
+		"""Creates a deep copy of the current game state."""
+		new_game = Game(self.n, self.mode) # Create a new instance with same initial params
+		new_game.moves = self.moves
+		# Deep copy players (assuming Player class is simple or also needs deep copy)
+		new_game.players = [copy.deepcopy(p) for p in self.players]
+		# Deep copy the board (list of lists/tuples)
+		new_game.board = copy.deepcopy(self.board)
+		new_game.turn = self.turn
+		# Copy any other relevant attributes if they exist and affect game state
+		# new_game.winner = copy.deepcopy(self.winner) # If winner is mutable
+		return new_game
+	
 	def square_to_num(self,square_string):
 		''' Return -1 if square_string is invalid
 		'''

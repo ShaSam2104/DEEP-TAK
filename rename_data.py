@@ -2,7 +2,7 @@ import os
 import shutil
 from pathlib import Path
 
-def copy_and_rename_incrementally(input_dir, output_dir, prefix="game_", start=1):
+def copy_and_rename_incrementally(input_dir, output_dir, prefix="game_", start=0):
     input_path = Path(input_dir)
     output_path = Path(output_dir)
     output_path.mkdir(parents=True, exist_ok=True)

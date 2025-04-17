@@ -317,17 +317,120 @@ class TakDatasetWithBoardState(Dataset):
         sample = self.samples[idx]
         return sample['board_state'], sample['move_history'], sample['target_move']
 
+def format_winner_token(player_id, winner):
+    # player_id: 0 or 1, winner: 0 or 1
+    if player_id == winner:
+        return f"{player_id}W{1-player_id}L"
+    else:
+        return f"{player_id}L{1-player_id}W"
+
+# When loading a sample:
+move_history = ... # list of moves
+player_id = ...    # 0 or 1
+winner = ...       # from JSON
+move_history.append(format_winner_token(player_id, winner))
+
 # ---------------------- TRAINING FUNCTIONS ----------------------
-def compute_loss(logits, targets, valid_moves_mask=None):
-    """Compute cross entropy loss, optionally with move masking"""
-    if valid_moves_mask is not None:
-        # Apply valid moves mask to logits
-        logits = mask_invalid_moves(logits, valid_moves_mask)
+def compute_loss(logits, targets, valid_moves_mask=None, board_states=None, moves=None, winner=None, player_id=None, alpha=0.7):
+    """Compute loss combining BCE with heuristic evaluation"""
+    # Standard BCE loss
+    bce_loss = nn.BCEWithLogitsLoss()(logits, targets)
     
-    # Use target moves as binary targets with binary cross entropy loss
-    # This handles multi-token moves better than cross entropy with single class
-    loss = nn.BCEWithLogitsLoss()(logits, targets)
-    return loss
+    # If we don't have board states for heuristic calculation
+    if board_states is None:
+        return bce_loss
+        
+    # Add heuristic-based loss component
+    batch_size = logits.size(0)
+    heuristic_loss = 0.0
+    
+    for i in range(batch_size):
+        # Get current board state
+        board = board_states[i]
+        
+        # Calculate heuristic components similar to main.cpp
+        captured_value = calculate_captured_advantage(board)
+        composition_value = calculate_composition_value(board) 
+        center_control = calculate_center_control(board)
+        influence_value = calculate_influence(board)
+        
+        # Combine heuristic components
+        heuristic_value = 1.4*captured_value + 1.55*composition_value + 0.9*influence_value + 1.1*center_control
+        
+        # Normalize heuristic value to appropriate scale
+        normalized_heuristic = torch.tanh(torch.tensor(heuristic_value/1000.0))
+        
+        # Add to total heuristic loss
+        heuristic_loss += (1.0 - normalized_heuristic)
+    
+    heuristic_loss = heuristic_loss / batch_size
+    
+    # Combine losses with weighting parameter alpha
+    combined_loss = alpha * bce_loss + (1 - alpha) * heuristic_loss
+
+    # If this sample is a losing game for the current player, increase loss
+    if winner is not None and player_id is not None and winner != player_id:
+        combined_loss = combined_loss * 10  # or another large factor
+
+    return combined_loss
+
+def count_pieces(board_tensor, channels):
+    """Sum the number of pieces for the given channels."""
+    # board_tensor: [flattened_board, global_features]
+    # First, extract the board part (7, board_size, board_size)
+    board_size = int(((board_tensor.shape[0] - 6) // 7) ** 0.5)
+    board = board_tensor[:7 * board_size * board_size].reshape(7, board_size, board_size)
+    return board[channels].sum().item()
+
+def calculate_captured_advantage(board_tensor):
+    """Advantage based on number of flatstones and capstones controlled."""
+    my_pieces = count_pieces(board_tensor, [0, 2])  # player1_flat, player1_cap
+    opponent_pieces = count_pieces(board_tensor, [1, 3])  # player2_flat, player2_cap
+    return (my_pieces - opponent_pieces) * 50
+
+def calculate_composition_value(board_tensor):
+    """Reward for having more flats/caps, penalize for opponent's walls."""
+    board_size = int(((board_tensor.shape[0] - 6) // 7) ** 0.5)
+    board = board_tensor[:7 * board_size * board_size].reshape(7, board_size, board_size)
+    my_flats = board[0].sum().item()
+    my_caps = board[2].sum().item()
+    my_walls = board[4].sum().item()
+    opp_flats = board[1].sum().item()
+    opp_caps = board[3].sum().item()
+    opp_walls = board[5].sum().item()
+    return (
+        3.0 * my_flats + 2.99 * my_caps + 2.98 * my_walls
+        - 3.0 * opp_flats - 2.99 * opp_caps - 2.98 * opp_walls
+    )
+
+def calculate_center_control(board_tensor):
+    """Reward for controlling center squares."""
+    board_size = int(((board_tensor.shape[0] - 6) // 7) ** 0.5)
+    board = board_tensor[:7 * board_size * board_size].reshape(7, board_size, board_size)
+    center = (board_size - 1) / 2
+    y, x = torch.meshgrid(torch.arange(board_size), torch.arange(board_size), indexing='ij')
+    dist = ((x - center) ** 2 + (y - center) ** 2).sqrt()
+    max_dist = dist.max()
+    weights = 1.0 - dist / max_dist  # 1 at center, 0 at edge
+    my_control = (board[0] + board[2]) * weights
+    opp_control = (board[1] + board[3]) * weights
+    return my_control.sum().item() - opp_control.sum().item()
+
+def calculate_influence(board_tensor):
+    """Influence: reward for having more pieces adjacent to empty or opponent squares."""
+    board_size = int(((board_tensor.shape[0] - 6) // 7) ** 0.5)
+    board = board_tensor[:7 * board_size * board_size].reshape(7, board_size, board_size)
+    my_presence = (board[0] + board[2] + board[4])
+    opp_presence = (board[1] + board[3] + board[5])
+    influence = 0.0
+    my_pad = torch.nn.functional.pad(my_presence, (1,1,1,1))
+    opp_pad = torch.nn.functional.pad(opp_presence, (1,1,1,1))
+    for dx, dy in [(-1,0),(1,0),(0,-1),(0,1)]:
+        my_neighbors = my_pad[1+dy:1+dy+board_size, 1+dx:1+dx+board_size]
+        opp_neighbors = opp_pad[1+dy:1+dy+board_size, 1+dx:1+dx+board_size]
+        influence += (my_neighbors * (1 - opp_presence)).sum().item()
+        influence -= (opp_neighbors * (1 - my_presence)).sum().item()
+    return influence
 
 def train_step(model, optimizer, board_state, move_history, target_move, valid_moves_mask=None):
     """Execute a single training step"""

@@ -436,6 +436,117 @@ class TakGameEngine:
                 return piece_type == self.FLAT or piece_type == self.CAPSTONE
         return False
 
+    def print_board(self):
+        """Prints the current board state with full stacks for each square."""
+        piece_symbols = {0: 'F', 1: 'S', 2: 'C'}
+        print("   " + " ".join([chr(97 + c) for c in range(self.board_size)]))
+        for row in range(self.board_size-1, -1, -1):
+            row_str = f"{row+1} "
+            for col in range(self.board_size):
+                stack = self.board[row][col]
+                if not stack:
+                    row_str += ".   "
+                else:
+                    # Show full stack, bottom to top
+                    stack_str = ""
+                    for player, piece_type in stack:
+                        symbol = piece_symbols.get(piece_type, '?')
+                        stack_str += f"{symbol}{player}"
+                    # Pad to 3 chars for alignment
+                    row_str += stack_str.ljust(3)
+                    row_str += " "
+            print(row_str)
+        print()
+
+    def get_heuristic(self):
+        """Calculate a heuristic value for the current board state (simplified version)."""
+        flat = 3
+        wall = 2.98
+        cap = 2.99
+        diff = [0, 35, 75, 120, 170, 235, 285, 400]
+        board_size = self.board_size
+
+        # Count pieces per player
+        arr = [[0 for _ in range(6)] for _ in range(2 * board_size)]
+        for i in range(board_size):
+            for j in range(board_size):
+                stack = self.board[i][j]
+                if not stack:
+                    continue
+                top = stack[-1]
+                # Encoding: 0=F1, 1=S1, 2=C1, 3=F2, 4=S2, 5=C2
+                idx = top[1] + (0 if top[0] == 1 else 3)
+                arr[i][idx] += 1
+                arr[j + board_size][idx] += 1
+
+        # Captured advantage
+        captured = 0.0
+        for i in range(board_size):
+            captured += (arr[i][0] - arr[i][3]) * 50 + (arr[i][2] - arr[i][5]) * 80
+
+        # Composition value and center control
+        composition_value = 0.0
+        center_value = 0.0
+        for i in range(2 * board_size):
+            flat_capt_me = arr[i][0]
+            wall_capt_me = arr[i][1]
+            cap_capt_me = arr[i][2]
+            my_capt = flat_capt_me + cap_capt_me
+
+            flat_capt_you = arr[i][3]
+            wall_capt_you = arr[i][4]
+            cap_capt_you = arr[i][5]
+            your_capt = flat_capt_you + cap_capt_you
+
+            capt_diff = my_capt - your_capt
+            capture_advantage = diff[min(my_capt, len(diff)-1)]
+            capture_disadvantage = diff[min(your_capt, len(diff)-1)]
+
+            wallFactor = 0.9  # Simplified
+            if capt_diff > 0:
+                wall_disadvantage = wall_capt_me * 32 + wall_capt_you * 40 + diff[abs(capt_diff)] * (wall_capt_me + wall_capt_you) * 2 / board_size
+            elif capt_diff < 0:
+                wall_disadvantage = wall_capt_me * 32 + wall_capt_you * 40 - diff[abs(capt_diff)] * (wall_capt_me + wall_capt_you) * 2 / board_size
+            else:
+                wall_disadvantage = wall_capt_me * 32 + wall_capt_you * 32
+
+            composition_value += capture_advantage - capture_disadvantage - wallFactor * wall_disadvantage
+
+            # Center control (simplified)
+            if i < board_size:
+                center_value += (cap_capt_me - cap_capt_you) * (board_size - i - 1) * i * 5
+            else:
+                center_value += (cap_capt_me - cap_capt_you) * (2 * board_size - i - 1) * (i - board_size) * 5
+
+        # Piece holdings
+        piece_val = 0.0
+        piece_val += 60 * self.pieces[1]['C']
+        piece_val -= 60 * self.pieces[2]['C']
+        piece_val -= 24 * self.pieces[1]['F']
+        piece_val += 24 * self.pieces[2]['F']
+
+        # Influence (very simplified: count of pieces)
+        infl_value = 0.0
+        for i in range(board_size):
+            for j in range(board_size):
+                stack = self.board[i][j]
+                if stack:
+                    infl_value += len(stack) if stack[-1][0] == 1 else -len(stack)
+
+        # Move advantage (not tracked here, set to 0)
+        move_advantage = 0.0
+
+        # Combine (weights as in C++ for 5x5)
+        heuristic_value = (
+            move_advantage +
+            1.4 * captured +
+            1.55 * composition_value +
+            piece_val +
+            0.9 * infl_value +
+            1.1 * center_value
+        )
+        return heuristic_value
+
 def self_play(model, token_to_id, id_to_token, vocab_size,
               board_feature_size, num_games=10, max_moves=100,
               temperature=1.0, device="cuda"):
@@ -525,7 +636,6 @@ def self_play(model, token_to_id, id_to_token, vocab_size,
                     # Find a complete move that starts with this token
                     possible_moves = [m for m in valid_moves if tokenize_move(m)[0] == main_token]
                     if possible_moves:
-                        print(possible_moves)
                         selected_move = random.choice(possible_moves)
                     else:
                         # Fallback to random valid move
@@ -538,12 +648,16 @@ def self_play(model, token_to_id, id_to_token, vocab_size,
             
             # Apply move
             if game_engine.apply_move(selected_move):
+                game_engine.print_board()
+                heuristic = game_engine.get_heuristic()
+                print(f"Heuristic after move {move_count}: {heuristic:.2f}")
                 # Store move data
                 move_data = {
                     "move_number": move_count,
                     "player": game_engine.current_player,  # This is already updated, so it's the next player
                     "move": selected_move,
-                    "board_state": board_state_dict
+                    "board_state": board_state_dict,
+                    "heuristic": heuristic
                 }
                 game_moves.append(move_data)
                 move_count += 1
@@ -552,6 +666,7 @@ def self_play(model, token_to_id, id_to_token, vocab_size,
                 # Select random valid move as fallback
                 fallback_move = random.choice(valid_moves)
                 if game_engine.apply_move(fallback_move):
+                    game_engine.print_board()
                     move_data = {
                         "move_number": move_count,
                         "player": game_engine.current_player,

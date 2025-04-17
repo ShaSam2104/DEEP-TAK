@@ -215,7 +215,7 @@ class TakTransformer(nn.Module):
         self.move_embedder = nn.Linear(vocab_size, d_model)
         
         # Positional encoding
-        self.pos_encoder = PositionalEncoding(d_model, dropout)
+        self.pos_encoder = PositionalEncoding(d_model, max_len=100)
         
         # Transformer encoder
         encoder_layers = nn.TransformerEncoderLayer(
@@ -282,46 +282,37 @@ class TakDatasetWithBoardState(Dataset):
         self.vocab_size = vocab_size
         self.max_history_len = max_history_len
         
-        # Process each game
         for game in game_data:
             moves = []
-            winner = game.get("winner", None)  # winner: 0 or 1
+            winner = game.get("winner", None)
+            prev_heuristic = 0.0
             for move_idx, move_data in enumerate(game["moves"]):
                 move = move_data["move"]
                 board_state_dict = move_data["board_state"]
                 player_turn = board_state_dict["turn"] - 1  # 0 or 1
 
-                # Add winner/loser token at the end of the move history
-                move_history = moves.copy()
-                # if winner is not None:
-                    # move_history.append(format_winner_token(player_turn, winner))
+                # Get heuristic value
+                heuristic = move_data.get("heuristic", 0.0)
+                heuristic_change = heuristic - prev_heuristic if move_idx > 0 else 0.0
 
-                # Get board state encoding
+                move_history = moves.copy()
                 board_state = TakBoard.encode_board_state_from_dict(board_state_dict)
                 
-                # Only add samples where we have move history
                 if moves:
-                    # Create move history tensor
-                    move_history_tensor = encode_move_history(move_history, token_to_id, vocab_size, max_history_len)
-                    
-                    # Encode target move
+                    move_history_tensor = encode_move_history(move_history, token_to_id, vocab_size, self.max_history_len)
                     target_move = encode_move(move, token_to_id, vocab_size)
-                    
-                    # Create sample
                     self.samples.append({
                         'board_state': board_state,
                         'move_history': move_history_tensor,
                         'target_move': target_move,
                         'winner': winner,
-                        'player_id': player_turn
+                        'player_id': player_turn,
+                        'heuristic_change': heuristic_change,
+                        'player_turn': board_state_dict["turn"]
                     })
-                
-                # Add current move to history
                 moves.append(move)
-    
-    def __len__(self):
-        return len(self.samples)
-    
+                prev_heuristic = heuristic
+
     def __getitem__(self, idx):
         sample = self.samples[idx]
         return (
@@ -329,8 +320,13 @@ class TakDatasetWithBoardState(Dataset):
             sample['move_history'],
             sample['target_move'],
             sample['winner'],
-            sample['player_id']
+            sample['player_id'],
+            sample['heuristic_change'],
+            sample['player_turn']
         )
+
+    def __len__(self):
+        return len(self.samples)
 
 def format_winner_token(player_id, winner):
     # player_id: 0 or 1, winner: 0 or 1
@@ -341,47 +337,34 @@ def format_winner_token(player_id, winner):
 
 
 # ---------------------- TRAINING FUNCTIONS ----------------------
-def compute_loss(logits, targets, valid_moves_mask=None, board_states=None, moves=None, winner=None, player_id=None, alpha=0.7):
-    """Compute loss combining BCE with heuristic evaluation"""
-    # Standard BCE loss
+def compute_loss(
+    logits, targets, valid_moves_mask=None, board_states=None, moves=None,
+    winner=None, player_id=None, alpha=0.7, heuristic_change=None, player_turn=None, beta=0.2
+):
     bce_loss = nn.BCEWithLogitsLoss()(logits, targets)
-    
-    # If we don't have board states for heuristic calculation
-    if board_states is None:
-        return bce_loss
-        
-    # Add heuristic-based loss component
-    batch_size = logits.size(0)
-    heuristic_loss = 0.0
-    
-    for i in range(batch_size):
-        # Get current board state
-        board = board_states[i]
-        
-        # Calculate heuristic components
-        captured_value = calculate_captured_advantage(board)
-        composition_value = calculate_composition_value(board) 
-        center_control = calculate_center_control(board)
-        influence_value = calculate_influence(board)
-        
-        # Combine heuristic components
-        heuristic_value = 1.4*captured_value + 1.55*composition_value + 0.9*influence_value + 1.1*center_control
-        
-        # Normalize heuristic value to appropriate scale
-        normalized_heuristic = torch.tanh(torch.tensor(heuristic_value/1000.0, device=board.device))
-        
-        # Add to total heuristic loss
-        heuristic_loss += (1.0 - normalized_heuristic)
-    
-    heuristic_loss = heuristic_loss / batch_size
-    
-    # Combine losses with weighting parameter alpha
-    combined_loss = alpha * bce_loss + (1 - alpha) * heuristic_loss
-    
+    # Standard BCE loss
+    combined_loss = alpha * bce_loss
+
+    # Heuristic change penalty/reward
+    if heuristic_change is not None and player_turn is not None:
+        # player_turn: 1 or 2
+        # heuristic_change: tensor of shape [batch_size]
+        # For player 1: reward if heuristic_change > 0, penalize if < 0
+        # For player 2: reward if heuristic_change < 0, penalize if > 0
+        hc = torch.tensor(heuristic_change, device=logits.device, dtype=torch.float32)
+        pt = torch.tensor(player_turn, device=logits.device, dtype=torch.float32)
+        # Player 1: pt==1, Player 2: pt==2
+        # Loss: -sign * heuristic_change (so negative if improvement, positive if worsening)
+        sign = torch.where(pt == 1, 1.0, -1.0)
+        heuristic_loss = -sign * hc
+        # Only penalize if the change is in the wrong direction
+        heuristic_loss = torch.relu(heuristic_loss)
+        combined_loss = combined_loss + beta * heuristic_loss.mean()
+
     # Process winner/player_id comparison element-wise for each item in batch
     if winner is not None and player_id is not None:
-        penalty = torch.ones(batch_size, device=logits.device)
-        for i in range(batch_size):
+        penalty = torch.ones(logits.size(0), device=logits.device)
+        for i in range(logits.size(0)):
             if winner[i].item() != player_id[i].item():
                 penalty[i] = 10.0  # Higher penalty for losing moves
         combined_loss = combined_loss * penalty.mean()
@@ -454,11 +437,15 @@ def calculate_influence(board_tensor):
         influence -= (opp_neighbors * (1 - my_presence)).sum().item()
     return influence
 
-def train_step(model, optimizer, board_state, move_history, target_move, winner, player_id, valid_moves_mask=None):
+def train_step(model, optimizer, board_state, move_history, target_move, winner, player_id, valid_moves_mask=None, heuristic_change=None, player_turn=None):
     model.train()
     optimizer.zero_grad()
     logits = model(board_state, move_history)
-    loss = compute_loss(logits, target_move, valid_moves_mask, board_states=board_state, winner=winner, player_id=player_id)
+    loss = compute_loss(
+        logits, target_move, valid_moves_mask, board_states=board_state,
+        winner=winner, player_id=player_id,
+        heuristic_change=heuristic_change, player_turn=player_turn
+    )
     loss.backward()
     optimizer.step()
     return loss.item()
@@ -467,18 +454,23 @@ def evaluate(model, dataloader, device, all_valid_moves_mask=None):
     model.eval()
     total_loss = 0.0
     with torch.no_grad():
-        for board_state, move_history, target_move, winner, player_id in dataloader:
+        for board_state, move_history, target_move, winner, player_id, heuristic_change, player_turn in dataloader:
             board_state = board_state.to(device)
             move_history = move_history.to(device)
             target_move = target_move.to(device)
-            # winner and player_id are scalars or tensors, keep as is
+            winner = winner.to(device) if winner is not None else None
+            player_id = player_id.to(device) if player_id is not None else None
+            heuristic_change = heuristic_change.to(device) if hasattr(heuristic_change, 'to') else torch.tensor(heuristic_change, device=device)
+            player_turn = player_turn.to(device) if hasattr(player_turn, 'to') else torch.tensor(player_turn, device=device)
             loss = compute_loss(
                 model(board_state, move_history),
                 target_move,
                 all_valid_moves_mask,
                 board_states=board_state,
                 winner=winner,
-                player_id=player_id
+                player_id=player_id,
+                heuristic_change=heuristic_change,
+                player_turn=player_turn
             )
             total_loss += loss.item()
     return total_loss / len(dataloader)
@@ -491,13 +483,18 @@ def train(model, train_dataset, test_dataset, epochs=10, batch_size=32, lr=1e-4,
     for epoch in range(epochs):
         model.train()
         train_loss = 0.0
-        for board_state, move_history, target_move, winner, player_id in train_dataloader:
+        for board_state, move_history, target_move, winner, player_id, heuristic_change, player_turn in train_dataloader:
             board_state = board_state.to(device)
             move_history = move_history.to(device)
             target_move = target_move.to(device)
-            # winner and player_id are tensors of shape [batch_size]
+            winner = winner.to(device) if winner is not None else None
+            player_id = player_id.to(device) if player_id is not None else None
+            heuristic_change = heuristic_change.to(device) if hasattr(heuristic_change, 'to') else torch.tensor(heuristic_change, device=device)
+            player_turn = player_turn.to(device) if hasattr(player_turn, 'to') else torch.tensor(player_turn, device=device)
+
             loss = train_step(
-                model, optimizer, board_state, move_history, target_move, winner, player_id
+                model, optimizer, board_state, move_history, target_move, winner, player_id,
+                heuristic_change=heuristic_change, player_turn=player_turn
             )
             train_loss += loss
         avg_train_loss = train_loss / len(train_dataloader)
@@ -549,15 +546,18 @@ def train_with_early_stopping(
     for epoch in range(epochs):
         model.train()
         train_loss = 0.0
-        for board_state, move_history, target_move, winner, player_id in train_dataloader:
+        for board_state, move_history, target_move, winner, player_id, heuristic_change, player_turn in train_dataloader:
             board_state = board_state.to(device)
             move_history = move_history.to(device)
             target_move = target_move.to(device)
             winner = winner.to(device) if winner is not None else None
             player_id = player_id.to(device) if player_id is not None else None
+            heuristic_change = heuristic_change.to(device) if hasattr(heuristic_change, 'to') else torch.tensor(heuristic_change, device=device)
+            player_turn = player_turn.to(device) if hasattr(player_turn, 'to') else torch.tensor(player_turn, device=device)
             
             loss = train_step(
-                model, optimizer, board_state, move_history, target_move, winner, player_id
+                model, optimizer, board_state, move_history, target_move, winner, player_id,
+                heuristic_change=heuristic_change, player_turn=player_turn
             )
             train_loss += loss
         avg_train_loss = train_loss / len(train_dataloader)
@@ -657,6 +657,6 @@ if __name__ == "__main__":
         'token_to_id': token_to_id,
         'id_to_token': id_to_token,
         'board_feature_size': board_feature_size
-    }, "tak_transformer_with_board_state.pth")
+    }, "tak_transformer_with_board_state_and_heuristics.pth")
     
     print("Model trained and saved as tak_transformer_with_board_state.pth")

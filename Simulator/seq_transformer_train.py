@@ -207,47 +207,49 @@ class PositionalEncoding(nn.Module):
 class TakTransformer(nn.Module):
     def __init__(self, vocab_size, board_feature_size, d_model=128, nhead=4, num_layers=4, dropout=0.1):
         super().__init__()
-        # Board state encoding
-        self.board_embedder = nn.Sequential(
-            nn.Linear(board_feature_size, 256),
-            nn.ReLU(),
-            nn.Linear(256, d_model)
-        )
         
-        # Move history processing
+        # Board state embedder
+        self.board_embedder = nn.Linear(board_feature_size, d_model)
+        
+        # Move embedder
         self.move_embedder = nn.Linear(vocab_size, d_model)
-        self.pos_enc = PositionalEncoding(d_model, max_len=150)
         
-        # Transformer layers
-        encoder_layer = nn.TransformerEncoderLayer(d_model, nhead, dim_feedforward=512, dropout=dropout)
-        self.transformer_encoder = nn.TransformerEncoder(encoder_layer, num_layers=num_layers)
+        # Positional encoding
+        self.pos_encoder = PositionalEncoding(d_model, dropout)
         
-        # Output projection - combines board state and move history
+        # Transformer encoder
+        encoder_layers = nn.TransformerEncoderLayer(
+            d_model=d_model, 
+            nhead=nhead, 
+            dropout=dropout, 
+            batch_first=True  # Add this to fix warning
+        )
+        self.transformer_encoder = nn.TransformerEncoder(encoder_layers, num_layers)
+        
+        # Output projection
         self.output_proj = nn.Linear(d_model * 2, vocab_size)
         
-    def forward(self, board_state, move_history):
-        batch_size = board_state.size(0)
+        # Move to specified device at initialization
+        self.device = 'cuda' if torch.cuda.is_available() else 'cpu'
+        self.to(self.device)
         
+    def forward(self, board_state, move_history):
         # Process board state
-        board_features = self.board_embedder(board_state)  # [batch_size, d_model]
+        board_emb = self.board_embedder(board_state)
         
         # Process move history
-        move_features = self.move_embedder(move_history)  # [batch_size, seq_len, d_model]
-        move_features = self.pos_enc(move_features)
+        move_emb = self.move_embedder(move_history)
+        move_emb = self.pos_encoder(move_emb)
+        move_seq = self.transformer_encoder(move_emb)
         
-        # Transformer processing (requires [seq_len, batch_size, d_model])
-        move_features = move_features.transpose(0, 1)
-        move_features = self.transformer_encoder(move_features)
-        move_features = move_features.transpose(0, 1)
+        # Take only the last output of the transformer
+        last_move = move_seq[:, -1, :]
         
-        # Get the representation of the last move
-        last_move_features = move_features[:, -1, :]  # [batch_size, d_model]
+        # Concatenate board embedding and transformer output
+        combined = torch.cat([board_emb, last_move], dim=1)
         
-        # Combine board and move features
-        combined_features = torch.cat([board_features, last_move_features], dim=1)  # [batch_size, d_model*2]
-        
-        # Generate move predictions
-        logits = self.output_proj(combined_features)  # [batch_size, vocab_size]
+        # Project to vocabulary size
+        logits = self.output_proj(combined)
         
         return logits
 
@@ -283,19 +285,24 @@ class TakDatasetWithBoardState(Dataset):
         # Process each game
         for game in game_data:
             moves = []
-            
-            # Process each move in the game
-            for move_data in game["moves"]:
+            winner = game.get("winner", None)  # winner: 0 or 1
+            for move_idx, move_data in enumerate(game["moves"]):
                 move = move_data["move"]
                 board_state_dict = move_data["board_state"]
-                
+                player_turn = board_state_dict["turn"] - 1  # 0 or 1
+
+                # Add winner/loser token at the end of the move history
+                move_history = moves.copy()
+                # if winner is not None:
+                    # move_history.append(format_winner_token(player_turn, winner))
+
                 # Get board state encoding
                 board_state = TakBoard.encode_board_state_from_dict(board_state_dict)
                 
                 # Only add samples where we have move history
                 if moves:
                     # Create move history tensor
-                    move_history = encode_move_history(moves, token_to_id, vocab_size, max_history_len)
+                    move_history_tensor = encode_move_history(move_history, token_to_id, vocab_size, max_history_len)
                     
                     # Encode target move
                     target_move = encode_move(move, token_to_id, vocab_size)
@@ -303,8 +310,10 @@ class TakDatasetWithBoardState(Dataset):
                     # Create sample
                     self.samples.append({
                         'board_state': board_state,
-                        'move_history': move_history,
-                        'target_move': target_move
+                        'move_history': move_history_tensor,
+                        'target_move': target_move,
+                        'winner': winner,
+                        'player_id': player_turn
                     })
                 
                 # Add current move to history
@@ -315,7 +324,13 @@ class TakDatasetWithBoardState(Dataset):
     
     def __getitem__(self, idx):
         sample = self.samples[idx]
-        return sample['board_state'], sample['move_history'], sample['target_move']
+        return (
+            sample['board_state'],
+            sample['move_history'],
+            sample['target_move'],
+            sample['winner'],
+            sample['player_id']
+        )
 
 def format_winner_token(player_id, winner):
     # player_id: 0 or 1, winner: 0 or 1
@@ -324,11 +339,6 @@ def format_winner_token(player_id, winner):
     else:
         return f"{player_id}L{1-player_id}W"
 
-# When loading a sample:
-move_history = ... # list of moves
-player_id = ...    # 0 or 1
-winner = ...       # from JSON
-move_history.append(format_winner_token(player_id, winner))
 
 # ---------------------- TRAINING FUNCTIONS ----------------------
 def compute_loss(logits, targets, valid_moves_mask=None, board_states=None, moves=None, winner=None, player_id=None, alpha=0.7):
@@ -348,7 +358,7 @@ def compute_loss(logits, targets, valid_moves_mask=None, board_states=None, move
         # Get current board state
         board = board_states[i]
         
-        # Calculate heuristic components similar to main.cpp
+        # Calculate heuristic components
         captured_value = calculate_captured_advantage(board)
         composition_value = calculate_composition_value(board) 
         center_control = calculate_center_control(board)
@@ -358,7 +368,7 @@ def compute_loss(logits, targets, valid_moves_mask=None, board_states=None, move
         heuristic_value = 1.4*captured_value + 1.55*composition_value + 0.9*influence_value + 1.1*center_control
         
         # Normalize heuristic value to appropriate scale
-        normalized_heuristic = torch.tanh(torch.tensor(heuristic_value/1000.0))
+        normalized_heuristic = torch.tanh(torch.tensor(heuristic_value/1000.0, device=board.device))
         
         # Add to total heuristic loss
         heuristic_loss += (1.0 - normalized_heuristic)
@@ -367,11 +377,15 @@ def compute_loss(logits, targets, valid_moves_mask=None, board_states=None, move
     
     # Combine losses with weighting parameter alpha
     combined_loss = alpha * bce_loss + (1 - alpha) * heuristic_loss
-
-    # If this sample is a losing game for the current player, increase loss
-    if winner is not None and player_id is not None and winner != player_id:
-        combined_loss = combined_loss * 10  # or another large factor
-
+    
+    # Process winner/player_id comparison element-wise for each item in batch
+    if winner is not None and player_id is not None:
+        penalty = torch.ones(batch_size, device=logits.device)
+        for i in range(batch_size):
+            if winner[i].item() != player_id[i].item():
+                penalty[i] = 10.0  # Higher penalty for losing moves
+        combined_loss = combined_loss * penalty.mean()
+    
     return combined_loss
 
 def count_pieces(board_tensor, channels):
@@ -408,10 +422,18 @@ def calculate_center_control(board_tensor):
     board_size = int(((board_tensor.shape[0] - 6) // 7) ** 0.5)
     board = board_tensor[:7 * board_size * board_size].reshape(7, board_size, board_size)
     center = (board_size - 1) / 2
-    y, x = torch.meshgrid(torch.arange(board_size), torch.arange(board_size), indexing='ij')
+    
+    # Get the device of the board tensor
+    device = board.device
+    
+    # Create tensors on the same device as board
+    y, x = torch.meshgrid(torch.arange(board_size, device=device), 
+                         torch.arange(board_size, device=device), 
+                         indexing='ij')
     dist = ((x - center) ** 2 + (y - center) ** 2).sqrt()
     max_dist = dist.max()
     weights = 1.0 - dist / max_dist  # 1 at center, 0 at edge
+    
     my_control = (board[0] + board[2]) * weights
     opp_control = (board[1] + board[3]) * weights
     return my_control.sum().item() - opp_control.sum().item()
@@ -432,71 +454,143 @@ def calculate_influence(board_tensor):
         influence -= (opp_neighbors * (1 - my_presence)).sum().item()
     return influence
 
-def train_step(model, optimizer, board_state, move_history, target_move, valid_moves_mask=None):
-    """Execute a single training step"""
+def train_step(model, optimizer, board_state, move_history, target_move, winner, player_id, valid_moves_mask=None):
     model.train()
     optimizer.zero_grad()
-    
-    # Forward pass
     logits = model(board_state, move_history)
-    
-    # Compute loss (with optional move masking)
-    loss = compute_loss(logits, target_move, valid_moves_mask)
-    
-    # Backward pass
+    loss = compute_loss(logits, target_move, valid_moves_mask, board_states=board_state, winner=winner, player_id=player_id)
     loss.backward()
     optimizer.step()
-    
     return loss.item()
 
 def evaluate(model, dataloader, device, all_valid_moves_mask=None):
-    """Evaluate model on a dataset"""
     model.eval()
     total_loss = 0.0
     with torch.no_grad():
-        for board_state, move_history, target_move in dataloader:
+        for board_state, move_history, target_move, winner, player_id in dataloader:
             board_state = board_state.to(device)
             move_history = move_history.to(device)
             target_move = target_move.to(device)
-            
-            # Forward pass
-            logits = model(board_state, move_history)
-            
-            # Compute loss
-            loss = compute_loss(logits, target_move, all_valid_moves_mask)
+            # winner and player_id are scalars or tensors, keep as is
+            loss = compute_loss(
+                model(board_state, move_history),
+                target_move,
+                all_valid_moves_mask,
+                board_states=board_state,
+                winner=winner,
+                player_id=player_id
+            )
             total_loss += loss.item()
-    
     return total_loss / len(dataloader)
 
 def train(model, train_dataset, test_dataset, epochs=10, batch_size=32, lr=1e-4, device="cuda"):
-    """Train the model"""
     train_dataloader = DataLoader(train_dataset, batch_size=batch_size, shuffle=True)
     test_dataloader = DataLoader(test_dataset, batch_size=batch_size, shuffle=False)
-    
     model = model.to(device)
     optimizer = torch.optim.Adam(model.parameters(), lr=lr)
-    
     for epoch in range(epochs):
-        # Training phase
         model.train()
         train_loss = 0.0
-        
-        for board_state, move_history, target_move in train_dataloader:
+        for board_state, move_history, target_move, winner, player_id in train_dataloader:
             board_state = board_state.to(device)
             move_history = move_history.to(device)
             target_move = target_move.to(device)
-            
-            # Train step
-            loss = train_step(model, optimizer, board_state, move_history, target_move)
+            # winner and player_id are tensors of shape [batch_size]
+            loss = train_step(
+                model, optimizer, board_state, move_history, target_move, winner, player_id
+            )
             train_loss += loss
-        
         avg_train_loss = train_loss / len(train_dataloader)
-        
-        # Evaluation phase
         avg_test_loss = evaluate(model, test_dataloader, device)
-        
         print(f"Epoch {epoch+1}/{epochs} - Train Loss: {avg_train_loss:.4f} - Test Loss: {avg_test_loss:.4f}")
+    return model
+
+def train_with_early_stopping(
+    model,
+    train_dataset,
+    test_dataset,
+    epochs=50,
+    batch_size=128,  # Increased from 32
+    lr=1e-4,
+    device="cuda",
+    patience=7,
+    checkpoint_interval=5,
+    checkpoint_dir="checkpoints",
+    log_path="training_log.csv"
+):
+    import csv
+    import os
+    os.makedirs(checkpoint_dir, exist_ok=True)
     
+    # Enhanced data loading
+    train_dataloader = DataLoader(
+        train_dataset, 
+        batch_size=batch_size, 
+        shuffle=True,
+        num_workers=4,      # Use multiple CPU cores
+        pin_memory=True,    # Speed up CPU->GPU transfers
+        prefetch_factor=2   # Prefetch batches
+    )
+    test_dataloader = DataLoader(
+        test_dataset, 
+        batch_size=batch_size, 
+        shuffle=False,
+        num_workers=4,
+        pin_memory=True
+    )
+    
+    # Rest of function remains the same
+    model = model.to(device)
+    optimizer = torch.optim.Adam(model.parameters(), lr=lr)
+    best_loss = float('inf')
+    epochs_no_improve = 0
+    log_rows = []
+
+    for epoch in range(epochs):
+        model.train()
+        train_loss = 0.0
+        for board_state, move_history, target_move, winner, player_id in train_dataloader:
+            board_state = board_state.to(device)
+            move_history = move_history.to(device)
+            target_move = target_move.to(device)
+            winner = winner.to(device) if winner is not None else None
+            player_id = player_id.to(device) if player_id is not None else None
+            
+            loss = train_step(
+                model, optimizer, board_state, move_history, target_move, winner, player_id
+            )
+            train_loss += loss
+        avg_train_loss = train_loss / len(train_dataloader)
+        avg_test_loss = evaluate(model, test_dataloader, device)
+        print(f"Epoch {epoch+1}/{epochs} - Train Loss: {avg_train_loss:.4f} - Test Loss: {avg_test_loss:.4f}")
+
+        # Logging
+        log_rows.append([epoch+1, avg_train_loss, avg_test_loss])
+        with open(log_path, "a", newline="") as f:
+            writer = csv.writer(f)
+            if epoch == 0 and f.tell() == 0:
+                writer.writerow(["epoch", "train_loss", "test_loss"])
+            writer.writerow([epoch+1, avg_train_loss, avg_test_loss])
+
+        # Early stopping logic
+        if avg_test_loss < best_loss:
+            best_loss = avg_test_loss
+            epochs_no_improve = 0
+            # Save best model
+            torch.save(model.state_dict(), os.path.join(checkpoint_dir, "tak_transformer_best.pth"))
+        else:
+            epochs_no_improve += 1
+            if epochs_no_improve >= patience:
+                print(f"Early stopping at epoch {epoch+1}")
+                break
+
+        # Checkpointing
+        if (epoch + 1) % checkpoint_interval == 0:
+            torch.save(
+                model.state_dict(),
+                os.path.join(checkpoint_dir, f"tak_transformer_epoch{epoch+1}.pth")
+            )
+
     return model
 
 # ---------------------- ENTRY POINT ----------------------
@@ -554,7 +648,7 @@ if __name__ == "__main__":
     device = "cuda" if torch.cuda.is_available() else "cpu"
     print(f"Using device: {device}")
     
-    model = train(model, train_dataset, test_dataset, epochs=50, batch_size=32, device=device)
+    model = train_with_early_stopping(model, train_dataset, test_dataset, epochs=50, batch_size=32, device=device)
     
     # Save model
     torch.save({
